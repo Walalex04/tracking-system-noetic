@@ -4,6 +4,7 @@ tracking_system:
   aruco_configuration:
     - amount_aruco: 100 #amount of robots and arena 
     - name_dictionary: "DICT_4X4_250"
+    - marker_size: 250
 
 
   system_configuration:
@@ -12,7 +13,7 @@ tracking_system:
   paths_files:
     # all paths is referenced to path of package, it mean track-sys. see package.xml
     output:
-      - aruco_files: "output/images/aruco"
-      - data_raw: "output/data"
+      - aruco_files: "output/images/aruco/"
+      - data_raw: "output/data/"
     tmp:
-      - images: "tmp/images"
+      - images: "tmp/images/"

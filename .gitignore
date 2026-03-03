@@ -1,0 +1,19 @@
+
+track_sys/output/
+/__pycache__/
+
+track_sys/src/track_sys/*/__pycache__/
+
+*.pyc
+*.pyo
+*.pyd
+*.pyc.*
+*.swp
+
+*.*.pyc
+
+*.cpython-38.pyc
+
+# Virtual environments
+venv/
+.env/

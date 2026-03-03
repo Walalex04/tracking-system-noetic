@@ -19,4 +19,8 @@ def get_path_aruco():
     return config["tracking_system"]["paths_files"]["output"][0]["aruco_files"]
 
 
-print(get_path_aruco())
+def get_number_arucos():
+    return config["tracking_system"]["aruco_configuration"][0]["amount_aruco"]
+
+def get_marker_size():
+    return config["tracking_system"]["aruco_configuration"][2]["marker_size"]

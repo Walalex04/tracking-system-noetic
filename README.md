@@ -19,11 +19,19 @@ rosdep install --from-paths src --ignore-src -r -y
 ```
 
 
+
 build and execute 
 
 ```
 cd ~/catkin_ws
 catkin_make
 . devel/setup.bash
-roslaunch track-sys track-sys_py.launch
+roslaunch track_sys track-sys_py.launch
+```
+
+
+To generate the aruco launch this
+
+```
+roslaunch track_sys creation_marker_py.launch
 ```
