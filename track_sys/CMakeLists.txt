@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.0.2)
-project(track-sys)
+project(track_sys)
 
 ## Compile as C++11, supported in ROS Kinetic and newer
 # add_compile_options(-std=c++11)
@@ -157,16 +157,26 @@ include_directories(
 ## Install ##
 #############
 
+
+
 # all install targets should use catkin DESTINATION variables
 # See http://ros.org/doc/api/catkin/html/adv_user_guide/variables.html
 
 ## Mark executable scripts (Python etc.) for installation
 ## in contrast to setup.py, you can choose the destination
+
+
+catkin_python_setup()
+
+
 catkin_install_python(PROGRAMS
 #   scripts/my_python_script
   
   scripts/camera_node.py
   scripts/view_camera.py
+  scripts/gen_marker_execute.py
+
+
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 

@@ -7,7 +7,7 @@ def publish_message():
  
   # Node is publishing to the video_frames topic using 
   # the message type Image
-  pub = rospy.Publisher('video_frames', Image, queue_size=10)
+  pub = rospy.Publisher('video_frames', Image, queue_size=100)
      
   # Tells rospy the name of the node.
   # Anonymous = True makes sure the node has a unique name. Random
@@ -15,7 +15,7 @@ def publish_message():
   rospy.init_node('video_pub_py', anonymous=True)
      
   # Go through the loop 10 times per second
-  rate = rospy.Rate(1000) # 10hz
+  rate = rospy.Rate(100) # 10hz
      
   # Create a VideoCapture object
   # The argument '0' gets the default webcam.

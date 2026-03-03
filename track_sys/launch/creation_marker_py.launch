@@ -1,0 +1,11 @@
+
+
+<launch>
+
+    <node 
+        pkg="track_sys"
+        type="gen_marker_execute.py"
+        name="gen_marker_execute"
+        output="screen"
+    />
+</launch>
