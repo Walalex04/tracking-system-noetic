@@ -1,0 +1,15 @@
+<launch>
+
+  <node
+    pkg="track-sys"
+    type="camera_node.py"
+    name="camera_node"
+    output="screen"
+  />
+      <node
+        pkg="track-sys"
+        type="view_camera.py"
+        name="view_camera"
+        output="screen"
+    />
+</launch>
