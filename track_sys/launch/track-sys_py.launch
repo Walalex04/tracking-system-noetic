@@ -8,8 +8,8 @@
   />
       <node
         pkg="track_sys"
-        type="view_camera.py"
-        name="view_camera"
+        type="detector_node.py"
+        name="detector_node"
         output="screen"
     />
 </launch>

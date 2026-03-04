@@ -175,7 +175,7 @@ catkin_install_python(PROGRAMS
   scripts/camera_node.py
   scripts/view_camera.py
   scripts/gen_marker_execute.py
-
+  scripts/detector_node.py
 
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
