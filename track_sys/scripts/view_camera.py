@@ -23,7 +23,7 @@ def callback(data):
 
 def receive_message():
     rospy.init_node('video_sub_py', anonymous=True)
-    rospy.Subscriber('/video_frames', Image, callback)
+    rospy.Subscriber('/image_cropped', Image, callback)
     rospy.spin()
    
 

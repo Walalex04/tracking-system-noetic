@@ -69,8 +69,8 @@
   <exec_depend>std_msgs</exec_depend>
 
 
-  <depend>compressed_image_transport</depend>
-  <depend>theora_image_transport</depend>
+  <build_depend>compressed_image_transport</build_depend>
+  <build_depend>image_transport</build_depend>
   
 
 

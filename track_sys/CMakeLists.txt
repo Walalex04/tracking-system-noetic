@@ -124,14 +124,30 @@ include_directories(
 )
 
 ## Declare a C++ library
-# add_library(${PROJECT_NAME}
-#   src/${PROJECT_NAME}/track-sys.cpp
-# )
+#add_library(${PROJECT_NAME}
+#  src/${PROJECT_NAME}/scripts/cropper_calibration.cpp
+#)
+
+add_executable(cropper_calibration scripts/cropper_calibration.cpp)
+add_executable(cropper_node scripts/cropper_node.cpp)
+
+target_link_libraries(cropper_calibration
+  ${catkin_LIBRARIES}
+)
+
+target_link_libraries(cropper_node
+  ${catkin_LIBRARIES}
+  ${OpenCV_LIBRARIES}
+)
+
+
 
 ## Add cmake target dependencies of the library
 ## as an example, code may need to be generated before libraries
 ## either from message generation or dynamic reconfigure
-# add_dependencies(${PROJECT_NAME} ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+#add_dependencies(${PROJECT_NAME} ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+add_dependencies(cropper_calibration ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+add_dependencies(cropper_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 ## Declare a C++ executable
 ## With catkin_make all packages are built within a single CMake context
