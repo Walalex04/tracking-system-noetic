@@ -15,10 +15,10 @@ public:
 	CropperCalibrator()
 		: image_transport_(node_handle_), cropped(false), n_points(0), ratio_(0.8)
 	{
-		//image_sub_ = image_transport_.subscribe("camera/image_rect_color", 1,
-		//                                        &CropperCalibrator::imageCallback, this);
+		image_sub_ = image_transport_.subscribe("/image_rect_color", 1,
+		                                        &CropperCalibrator::imageCallback, this);
 
-		image_sub_ = image_transport_.subscribe("/video_frames", 1, &CropperCalibrator::imageCallback, this);
+		//image_sub_ = image_transport_.subscribe("/video_frames", 1, &CropperCalibrator::imageCallback, this);
 		pub_alive_ = node_handle_.advertise<std_msgs::Bool>("alive", 10);
 		
 		// Open YAML file to store the calibration parameters

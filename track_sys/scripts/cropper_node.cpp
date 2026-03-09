@@ -40,8 +40,8 @@ public:
 
 		try
 		{
-			//cv_ptr = cv_bridge::toCvCopy(msg, sensor_msgs::image_encodings::BGR8);
-			cv_ptr = cv_bridge::toCvCopy(msg, msg->encoding);
+			cv_ptr = cv_bridge::toCvCopy(msg, sensor_msgs::image_encodings::BGR8);
+			//cv_ptr = cv_bridge::toCvCopy(msg, msg->encoding);
 		}
 		catch (cv_bridge::Exception& e)
 		{
@@ -64,8 +64,8 @@ public:
 		img_.copyTo(roi_, mask_);
 
 		// Send image
-		//out_msg_ = cv_bridge::CvImage(std_msgs::Header(msg->header), "bgr8", roi_).toImageMsg();
-		out_msg_ = cv_bridge::CvImage(msg->header, msg->encoding, roi_).toImageMsg();
+		out_msg_ = cv_bridge::CvImage(std_msgs::Header(msg->header), "bgr8", roi_).toImageMsg();
+		//out_msg_ = cv_bridge::CvImage(msg->header, msg->encoding, roi_).toImageMsg();
 		image_pub_.publish(out_msg_);
 	}
 

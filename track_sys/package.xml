@@ -69,10 +69,13 @@
   <exec_depend>std_msgs</exec_depend>
 
 
+
   <build_depend>compressed_image_transport</build_depend>
   <build_depend>image_transport</build_depend>
+  <build_depend>camera_info_manager</build_depend>
   
-
+  
+  <depend> camera_calibration </depend>
 
   <!-- The export tag contains other, unspecified, tags -->
   <export>

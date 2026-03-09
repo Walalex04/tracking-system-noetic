@@ -14,6 +14,7 @@ find_package(catkin REQUIRED COMPONENTS
   rospy
   sensor_msgs
   std_msgs
+  camera_info_manager
 )
 
 ## System dependencies are found with CMake's conventions
@@ -128,8 +129,13 @@ include_directories(
 #  src/${PROJECT_NAME}/scripts/cropper_calibration.cpp
 #)
 
+
+add_executable(camera_node scripts/camera_node.cpp)
 add_executable(cropper_calibration scripts/cropper_calibration.cpp)
 add_executable(cropper_node scripts/cropper_node.cpp)
+add_executable(tracker_node scripts/tracker_node.cpp)
+
+
 
 target_link_libraries(cropper_calibration
   ${catkin_LIBRARIES}
@@ -140,7 +146,15 @@ target_link_libraries(cropper_node
   ${OpenCV_LIBRARIES}
 )
 
+target_link_libraries(tracker_node
+  ${catkin_LIBRARIES}
+  ${OpenCV_LIBRARIES}
+)
 
+target_link_libraries(camera_node
+  ${catkin_LIBRARIES}
+  ${OpenCV_LIBRARIES}
+)
 
 ## Add cmake target dependencies of the library
 ## as an example, code may need to be generated before libraries
@@ -148,6 +162,7 @@ target_link_libraries(cropper_node
 #add_dependencies(${PROJECT_NAME} ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 add_dependencies(cropper_calibration ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 add_dependencies(cropper_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+add_dependencies(tracker_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 ## Declare a C++ executable
 ## With catkin_make all packages are built within a single CMake context
@@ -188,7 +203,7 @@ catkin_python_setup()
 catkin_install_python(PROGRAMS
 #   scripts/my_python_script
   
-  scripts/camera_node.py
+  #scripts/camera_node.py
   scripts/view_camera.py
   scripts/gen_marker_execute.py
   scripts/detector_node.py
