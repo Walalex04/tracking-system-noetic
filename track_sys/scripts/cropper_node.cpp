@@ -12,7 +12,7 @@ public:
 	Cropper()
 		: image_transport_(node_handle_), mask_defined(false)
 	{
-		image_sub_ = image_transport_.subscribe("/video_frames", 1,
+		image_sub_ = image_transport_.subscribe("/image_rect", 1,
 		                                        &Cropper::imageCallback, this);
 		image_pub_ = image_transport_.advertise("image_cropped", 1);
 		
@@ -58,6 +58,7 @@ public:
 			mask_ = cv::Mat::zeros(img_.rows, img_.cols, CV_8UC1);
 			std::vector<std::vector<cv::Point>> points{vertices_};
 			cv::fillPoly(mask_, points, cv::Scalar(255, 255, 255));
+			mask_defined = true;
 		}
 
 		// Apply mask to image

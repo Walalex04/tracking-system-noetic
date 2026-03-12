@@ -33,7 +33,7 @@ public:
 		}
 		else
 		{
-			image_sub_ = it_.subscribe("/video_frames", 20, &Tracker::imageCb, this);
+			image_sub_ = it_.subscribe("/image_rect", 20, &Tracker::imageCb, this);
 		}
 		
 		// Advertise a list of integers

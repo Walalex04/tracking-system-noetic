@@ -139,6 +139,7 @@ add_executable(tracker_node scripts/tracker_node.cpp)
 
 target_link_libraries(cropper_calibration
   ${catkin_LIBRARIES}
+  ${OpenCV_LIBRARIES}
 )
 
 target_link_libraries(cropper_node
