@@ -1,7 +1,7 @@
 <launch>
 
-  <env name="ROS_MASTER_URI" value="http://192.168.0.101:11311" />
-  <env name="ROS_IP" value="192.168.0.101" />
+  <env name="ROS_MASTER_URI" value="http://192.168.0.116:11311" />
+  <env name="ROS_IP" value="192.168.0.116" />
 
   <node
     pkg="track_sys"
