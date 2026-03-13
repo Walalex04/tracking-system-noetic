@@ -44,16 +44,16 @@ public:
 		sub_tracker_ = node_handle_.subscribe("tracker/positions_stamped", 20, &Transformer::transformerCallback, this);
 
 		// Get namespace
-		transformer.ns = ros::this_node::getNamespace();
+		transformer.ns = "";
 
 		// Get config data
-		std::string param = transformer.ns + "/transformer/x_offset";
+		std::string param = "/transformer_node/x_offset";
 		node_handle_.getParam(param, transformer.x_offset);
-		param = transformer.ns + "/transformer/y_offset";
+		param = "/transformer_node/y_offset";
 		node_handle_.getParam(param, transformer.y_offset);
-		param = transformer.ns + "/transformer/angular_offset";
+		param = "/transformer_node/angular_offset";
 		node_handle_.getParam(param, transformer.angular_offset);
-		param = transformer.ns + "/transformer/scale_factor";
+		param = "/transformer_node/scale_factor";
 		node_handle_.getParam(param, transformer.scale_factor);
 	}
 
@@ -111,13 +111,26 @@ public:
 				robot_pose_msg.pose.pose.position.z = 0.0;
 
 				// Compute orientation (yaw in 2D) of the robot marker
-				double pose_yaw = atan2(y.at(1) - y.at(0), x.at(1) - x.at(0));
+				//double pose_yaw = atan2(y.at(1) - y.at(0), x.at(1) - x.at(0));
+
+				double dx = x.at(1) - x.at(0);
+				double dy = y.at(1) - y.at(0);
+
+				if(std::fabs(dx) < 1e-6 && std::fabs(dy) < 1e-6)
+				{
+					ROS_WARN("Invalid marker orientation detected, skipping");
+					return;
+				}
+
+				double pose_yaw = atan2(dy, dx);
+
 
 				tf2::Quaternion orientation_quat;
 				orientation_quat.setRPY(0, 0, pose_yaw);
 				tf2::convert(orientation_quat, robot_pose_msg.pose.pose.orientation);
 
 				// Set covariance for the cameras
+				
 				robot_pose_msg.pose.covariance = {1e-6, 0.0,  0.0, 0.0, 0.0, 0.0,
 				                                  0.0,  1e-6, 0.0, 0.0, 0.0, 0.0,
 				                                  0.0,  0.0,  0.0, 0.0, 0.0, 0.0,
@@ -125,6 +138,13 @@ public:
 				                                  0.0,  0.0,  0.0, 0.0, 0.0, 0.0,
 				                                  0.0,  0.0,  0.0, 0.0, 0.0, 1e-6};
 
+				/*
+				robot_pose_msg.pose.covariance = {1e-3, 0, 0, 0, 0, 0,
+                                  0, 1e-3, 0, 0, 0, 0,
+                                  0, 0, 1e6, 0, 0, 0,
+                                  0, 0, 0, 1e6, 0, 0,
+                                  0, 0, 0, 0, 1e6, 0,
+                                  0, 0, 0, 0, 0, 1e-2};*/
 				// Publish to corresponding topic
 				transformer.list_messages.at(robot_id) = robot_pose_msg;
 			}
