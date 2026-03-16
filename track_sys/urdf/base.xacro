@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="epuck">
+
+    <xacro:property name="base_mass" value="1" />
+    <xacro:property name="base_scale" value="0.5 0.5 0.5" />
+
+    <xacro:macro name="base">
+        <link name="base_link_3">
+            <visual>
+                <origin xyz="0 0 0" rpy="0 0 0" />
+                <geometry>
+                    <mesh filename="package://track_sys/meshes/qupa.dae" scale="${base_scale}" />
+                </geometry>
+            </visual>
+        </link>
+    </xacro:macro>
+
+    <!-- INVOCAMOS LA MACRO -->
+    <xacro:base/>
+
+</robot>

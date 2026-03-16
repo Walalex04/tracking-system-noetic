@@ -12,7 +12,7 @@ public:
 	Cropper()
 		: image_transport_(node_handle_), mask_defined(false)
 	{
-		image_sub_ = image_transport_.subscribe("/image_rect", 1,
+		image_sub_ = image_transport_.subscribe("/image_rect_color", 1,
 		                                        &Cropper::imageCallback, this);
 		image_pub_ = image_transport_.advertise("image_cropped", 1);
 		

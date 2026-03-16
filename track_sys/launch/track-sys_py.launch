@@ -10,7 +10,7 @@
     output="screen"
   >
     <param name="camera_info_url"
-               value="file://$(find track_sys)/config/camera_calibration.yaml"/>
+               value="file://$(find track_sys)/config/camera_calibration_1280x720.yaml"/>
   </node>
 
   <node 
@@ -51,12 +51,22 @@
 	</node> 
 
 
+ <param name="robot_description"
+           command="$(find xacro)/xacro $(find track_sys)/urdf/base.xacro"/>
+
+    <!-- 2 publicar el robot -->
+    <node pkg="robot_state_publisher"
+          type="robot_state_publisher"
+          name="robot_state_publisher"/>
+
   <node pkg="robot_localization" type="ukf_localization_node" name="ukf_se" clear_params="true" ns="epuck_0" output="screen">
 		<rosparam command="load" file="$(find track_sys)/config/ukf_tycho.yaml" />  
 		<param name="base_link_frame" value="base_link_0"/>
 		<remap from="camera/odom" to="/epuck_0/odom"/>           
 
 	</node>
+
+	
 
 	<node pkg="robot_localization" type="ukf_localization_node" name="ukf_se" clear_params="true" ns="epuck_1" output="screen">
 		<rosparam command="load" file="$(find track_sys)/config/ukf_tycho.yaml" />  
@@ -322,5 +332,15 @@
 		<remap from="camera/odom" to="/epuck_38/odom"/> 
 	</node>
 
+
+	<node pkg="rosserial_python"
+          type="serial_node.py"
+          name="rosserial"
+          output="screen">
+
+        <param name="port" value="/dev/ttyUSB0"/>
+        <param name="baud" value="115200"/>
+
+    </node>
 
 </launch>
