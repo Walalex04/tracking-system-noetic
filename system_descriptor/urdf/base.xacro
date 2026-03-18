@@ -5,11 +5,11 @@
     <xacro:property name="base_scale" value="0.5 0.5 0.5" />
 
     <xacro:macro name="base">
-        <link name="base_link_3">
+        <link name="base_link_10">
             <visual>
                 <origin xyz="0 0 0" rpy="0 0 0" />
                 <geometry>
-                    <mesh filename="package://track_sys/meshes/qupa.dae" scale="${base_scale}" />
+                    <mesh filename="package://system_descriptor/meshes/qupa.dae" scale="${base_scale}" />
                 </geometry>
             </visual>
         </link>

@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <package format="2">
-  <name>track_sys</name>
+  <name>tracker_pkg</name>
   <version>0.0.0</version>
-  <description>The track_sys package</description>
+  <description>The tracker_pkg package</description>
 
   <!-- One maintainer tag required, multiple allowed, one person per tag -->
   <!-- Example:  -->
@@ -19,7 +19,7 @@
   <!-- Url tags are optional, but multiple are allowed, one per tag -->
   <!-- Optional attribute type can be: website, bugtracker, or repository -->
   <!-- Example: -->
-  <!-- <url type="website">http://wiki.ros.org/track-sys</url> -->
+  <!-- <url type="website">http://wiki.ros.org/tracker_pkg</url> -->
 
 
   <!-- Author tags are optional, multiple are allowed, one per tag -->
@@ -49,33 +49,16 @@
   <!-- Use doc_depend for packages you need only for building documentation: -->
   <!--   <doc_depend>doxygen</doc_depend> -->
   <buildtool_depend>catkin</buildtool_depend>
-  <build_depend>cv_bridge</build_depend>
-  <build_depend>image_transport</build_depend>
   <build_depend>roscpp</build_depend>
   <build_depend>rospy</build_depend>
-  <build_depend>sensor_msgs</build_depend>
   <build_depend>std_msgs</build_depend>
-  <build_export_depend>cv_bridge</build_export_depend>
-  <build_export_depend>image_transport</build_export_depend>
   <build_export_depend>roscpp</build_export_depend>
   <build_export_depend>rospy</build_export_depend>
-  <build_export_depend>sensor_msgs</build_export_depend>
   <build_export_depend>std_msgs</build_export_depend>
-  <exec_depend>cv_bridge</exec_depend>
-  <exec_depend>image_transport</exec_depend>
   <exec_depend>roscpp</exec_depend>
   <exec_depend>rospy</exec_depend>
-  <exec_depend>sensor_msgs</exec_depend>
   <exec_depend>std_msgs</exec_depend>
 
-
-
-  <build_depend>compressed_image_transport</build_depend>
-  <build_depend>image_transport</build_depend>
-  <build_depend>camera_info_manager</build_depend>
-  
-  
-  <depend> camera_calibration </depend>
 
   <!-- The export tag contains other, unspecified, tags -->
   <export>

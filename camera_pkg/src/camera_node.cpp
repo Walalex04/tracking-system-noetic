@@ -39,8 +39,22 @@ int main(int argc, char** argv)
     }
 
     cv::VideoCapture cap(0);
-    cap.set(cv::CAP_PROP_FRAME_WIDTH, 1280);
-    cap.set(cv::CAP_PROP_FRAME_HEIGHT, 720);
+
+    int camera_width, camera_height;
+    if (!nh.getParam("camera_width", camera_width))
+    {
+        ROS_ERROR("No se encontró el parámetro camera_width");
+        return 1;
+    }
+
+    if (!nh.getParam("camera_height", camera_height))
+    {
+        ROS_ERROR("No se encontró el parámetro camera_height");
+        return 1;
+    }
+
+    cap.set(cv::CAP_PROP_FRAME_WIDTH, camera_width);
+    cap.set(cv::CAP_PROP_FRAME_HEIGHT, camera_height);
 
     if (!cap.isOpened())
     {
