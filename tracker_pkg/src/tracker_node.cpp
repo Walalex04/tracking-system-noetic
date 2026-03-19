@@ -18,14 +18,14 @@ class Tracker
 	cv::Mat camera_matrix, dist_coeff; // These can be set after camera calibration to undistort image
 	cv::Ptr<cv::aruco::DetectorParameters> parameters;
 	cv::Ptr<cv::aruco::Dictionary> dictionary;
-	//cv::Mat kernel; // for sharpening; negligible effect observed
+	// cv::Mat kernel; // for sharpening; negligible effect observed
 
 public:
 	Tracker()
 		: it_(nh_)
 	{
 		// Subscribe to camera
-		bool crop;
+		bool crop = true;
 		nh_.getParam("tracker/crop", crop);
 		if (crop)
 		{
@@ -35,7 +35,7 @@ public:
 		{
 			image_sub_ = it_.subscribe("/image_rect", 20, &Tracker::imageCb, this);
 		}
-		
+
 		// Advertise a list of integers
 		pub = nh_.advertise<std_msgs::UInt32MultiArray>("tracker/positions_stamped", 20);
 
@@ -45,26 +45,26 @@ public:
 		parameters = cv::aruco::DetectorParameters::create();
 
 		// Modify parameters to improve marker detection
-		parameters->adaptiveThreshWinSizeMax = 21; //9
+		parameters->adaptiveThreshWinSizeMax = 21; // 9
 		parameters->adaptiveThreshWinSizeStep = 2;
-		parameters->minDistanceToBorder = 3; //0
-		parameters->perspectiveRemovePixelPerCell = 8; //5
+		parameters->minDistanceToBorder = 3;		   // 0
+		parameters->perspectiveRemovePixelPerCell = 8; // 5
 		parameters->cornerRefinementMethod = cv::aruco::CORNER_REFINE_SUBPIX;
 
 		//// Kernel for image sharpening
-		//float entries[9] = {0, -1, 0, -1, 5, -1, 0, -1, 0};
-		//kernel = cv::Mat(3, 3, CV_32F, entries);
+		// float entries[9] = {0, -1, 0, -1, 5, -1, 0, -1, 0};
+		// kernel = cv::Mat(3, 3, CV_32F, entries);
 	}
 
 	// Subscriber callback function
-	void imageCb(const sensor_msgs::ImageConstPtr& msg)
+	void imageCb(const sensor_msgs::ImageConstPtr &msg)
 	{
 		cv_bridge::CvImagePtr cv_ptr;
 		try
 		{
 			cv_ptr = cv_bridge::toCvCopy(msg, sensor_msgs::image_encodings::BGR8);
 		}
-		catch (cv_bridge::Exception& e)
+		catch (cv_bridge::Exception &e)
 		{
 			ROS_ERROR("cv_bridge exception: %s", e.what());
 		}
@@ -74,12 +74,12 @@ public:
 
 		// List that will store detection results
 		std::vector<int> ids;
-		std::vector<std::vector<cv::Point2f> > corners;
+		std::vector<std::vector<cv::Point2f>> corners;
 
 		//// Sharpen image to improve marker detection
-		//cv::Mat sharp_frame;
-		//cv::filter2D(cv_ptr->image, sharp_frame, -1, kernel);
-		//cv::aruco::detectMarkers(sharp_frame, dictionary, corners, ids, parameters);
+		// cv::Mat sharp_frame;
+		// cv::filter2D(cv_ptr->image, sharp_frame, -1, kernel);
+		// cv::aruco::detectMarkers(sharp_frame, dictionary, corners, ids, parameters);
 
 		// Aruco detection function
 		cv::aruco::detectMarkers(cv_ptr->image, dictionary, corners, ids, parameters);
@@ -103,7 +103,7 @@ public:
 	}
 };
 
-int main(int argc, char** argv)
+int main(int argc, char **argv)
 {
 	ros::init(argc, argv, "tracker");
 	Tracker tracker_object;

@@ -140,7 +140,52 @@ Visualization Manager:
     - Class: rviz/RobotModel
       Enabled: true
       Name: RobotModel
-      Robot Description: robot_description
+      Robot Description: epuck_10/robot_description
+      Update Interval: 0.0
+      TF Prefix: ""
+      Visual Enabled: true
+      Collision Enabled: false
+      Alpha: 1.0
+      Value: true
+    
+    - Class: rviz/RobotModel
+      Enabled: true
+      Name: RobotModel
+      Robot Description: epuck_11/robot_description
+      Update Interval: 0.0
+      TF Prefix: ""
+      Visual Enabled: true
+      Collision Enabled: false
+      Alpha: 1.0
+      Value: true
+
+    - Class: rviz/RobotModel
+      Enabled: true
+      Name: RobotModel
+      Robot Description: epuck_12/robot_description
+      Update Interval: 0.0
+      TF Prefix: ""
+      Visual Enabled: true
+      Collision Enabled: false
+      Alpha: 1.0
+      Value: true
+
+    - Class: rviz/RobotModel
+      Enabled: true
+      Name: RobotModel
+      Robot Description: epuck_13/robot_description
+      Update Interval: 0.0
+      TF Prefix: ""
+      Visual Enabled: true
+      Collision Enabled: false
+      Alpha: 1.0
+      Value: true
+
+
+    - Class: rviz/RobotModel
+      Enabled: true
+      Name: RobotModel
+      Robot Description: arena/robot_description
       Update Interval: 0.0
       TF Prefix: ""
       Visual Enabled: true

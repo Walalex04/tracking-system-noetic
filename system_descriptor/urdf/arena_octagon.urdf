@@ -1,0 +1,1770 @@
+<?xml version="1.0"?>
+<robot name="arena_octagon">
+
+  <link name="odom"/>
+
+  <link name="WALL_0_link">
+    <visual>
+      <geometry>
+        <box size="0.01 0.89984 0.233"/>
+      </geometry>
+      <material name="gray">
+        <color rgba="0.7 0.7 0.7 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.01 0.89984 0.233"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="WALL_0_joint" type="fixed">
+    <parent link="odom"/>
+    <child link="WALL_0_link"/>
+    <origin xyz="1.03000 0.00000 0.11650" rpy="0 0 0.00000"/>
+  </joint>
+
+  <link name="TAM_0_0_link">
+    <visual>
+      <geometry>
+        <box size="0.01 0.12523 0.233"/>
+      </geometry>
+      <material name="gray">
+        <color rgba="0.7 0.7 0.7 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.01 0.12523 0.233"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="TAM_0_0_joint" type="fixed">
+    <parent link="odom"/>
+    <child link="TAM_0_0_link"/>
+    <origin xyz="0.89440 -0.22496 0.11650" rpy="0 0 1.57080"/>
+  </joint>
+
+  <link name="TAM_0_WU_0_link">
+    <visual>
+      <geometry>
+        <box size="0.01 0.11089 0.233"/>
+      </geometry>
+      <material name="gray">
+        <color rgba="0.7 0.7 0.7 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.01 0.11089 0.233"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="TAM_0_WU_0_joint" type="fixed">
+    <parent link="odom"/>
+    <child link="TAM_0_WU_0_link"/>
+    <origin xyz="0.98439 -0.26095 0.11650" rpy="0 0 0.78540"/>
+  </joint>
+
+  <link name="TAM_0_WD_0_link">
+    <visual>
+      <geometry>
+        <box size="0.01 0.11089 0.233"/>
+      </geometry>
+      <material name="gray">
+        <color rgba="0.7 0.7 0.7 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.01 0.11089 0.233"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="TAM_0_WD_0_joint" type="fixed">
+    <parent link="odom"/>
+    <child link="TAM_0_WD_0_link"/>
+    <origin xyz="0.98439 -0.18897 0.11650" rpy="0 0 2.35619"/>
+  </joint>
+
+  <link name="TAM_1_0_link">
+    <visual>
+      <geometry>
+        <box size="0.01 0.12523 0.233"/>
+      </geometry>
+      <material name="gray">
+        <color rgba="0.7 0.7 0.7 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.01 0.12523 0.233"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="TAM_1_0_joint" type="fixed">
+    <parent link="odom"/>
+    <child link="TAM_1_0_link"/>
+    <origin xyz="0.89440 0.00000 0.11650" rpy="0 0 1.57080"/>
+  </joint>
+
+  <link name="TAM_1_WU_0_link">
+    <visual>
+      <geometry>
+        <box size="0.01 0.11089 0.233"/>
+      </geometry>
+      <material name="gray">
+        <color rgba="0.7 0.7 0.7 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.01 0.11089 0.233"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="TAM_1_WU_0_joint" type="fixed">
+    <parent link="odom"/>
+    <child link="TAM_1_WU_0_link"/>
+    <origin xyz="0.98439 -0.03599 0.11650" rpy="0 0 0.78540"/>
+  </joint>
+
+  <link name="TAM_1_WD_0_link">
+    <visual>
+      <geometry>
+        <box size="0.01 0.11089 0.233"/>
+      </geometry>
+      <material name="gray">
+        <color rgba="0.7 0.7 0.7 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.01 0.11089 0.233"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="TAM_1_WD_0_joint" type="fixed">
+    <parent link="odom"/>
+    <child link="TAM_1_WD_0_link"/>
+    <origin xyz="0.98439 0.03599 0.11650" rpy="0 0 2.35619"/>
+  </joint>
+
+  <link name="TAM_2_0_link">
+    <visual>
+      <geometry>
+        <box size="0.01 0.12523 0.233"/>
+      </geometry>
+      <material name="gray">
+        <color rgba="0.7 0.7 0.7 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.01 0.12523 0.233"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="TAM_2_0_joint" type="fixed">
+    <parent link="odom"/>
+    <child link="TAM_2_0_link"/>
+    <origin xyz="0.89440 0.22496 0.11650" rpy="0 0 1.57080"/>
+  </joint>
+
+  <link name="TAM_2_WU_0_link">
+    <visual>
+      <geometry>
+        <box size="0.01 0.11089 0.233"/>
+      </geometry>
+      <material name="gray">
+        <color rgba="0.7 0.7 0.7 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.01 0.11089 0.233"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="TAM_2_WU_0_joint" type="fixed">
+    <parent link="odom"/>
+    <child link="TAM_2_WU_0_link"/>
+    <origin xyz="0.98439 0.18897 0.11650" rpy="0 0 0.78540"/>
+  </joint>
+
+  <link name="TAM_2_WD_0_link">
+    <visual>
+      <geometry>
+        <box size="0.01 0.11089 0.233"/>
+      </geometry>
+      <material name="gray">
+        <color rgba="0.7 0.7 0.7 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.01 0.11089 0.233"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="TAM_2_WD_0_joint" type="fixed">
+    <parent link="odom"/>
+    <child link="TAM_2_WD_0_link"/>
+    <origin xyz="0.98439 0.26095 0.11650" rpy="0 0 2.35619"/>
+  </joint>
+
+  <link name="CAP_L_0_link">
+    <visual>
+      <geometry>
+        <box size="0.01 0.16422 0.233"/>
+      </geometry>
+      <material name="gray">
+        <color rgba="0.7 0.7 0.7 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.01 0.16422 0.233"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="CAP_L_0_joint" type="fixed">
+    <parent link="odom"/>
+    <child link="CAP_L_0_link"/>
+    <origin xyz="0.86441 -0.45736 0.11650" rpy="0 0 1.57080"/>
+  </joint>
+
+  <link name="CAP_L_WU_0_link">
+    <visual>
+      <geometry>
+        <box size="0.01 0.11089 0.233"/>
+      </geometry>
+      <material name="gray">
+        <color rgba="0.7 0.7 0.7 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.01 0.11089 0.233"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="CAP_L_WU_0_joint" type="fixed">
+    <parent link="odom"/>
+    <child link="CAP_L_WU_0_link"/>
+    <origin xyz="0.98439 -0.42137 0.11650" rpy="0 0 2.35619"/>
+  </joint>
+
+  <link name="CAP_R_0_link">
+    <visual>
+      <geometry>
+        <box size="0.01 0.16422 0.233"/>
+      </geometry>
+      <material name="gray">
+        <color rgba="0.7 0.7 0.7 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.01 0.16422 0.233"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="CAP_R_0_joint" type="fixed">
+    <parent link="odom"/>
+    <child link="CAP_R_0_link"/>
+    <origin xyz="0.86441 0.45736 0.11650" rpy="0 0 1.57080"/>
+  </joint>
+
+  <link name="CAP_R_WD_0_link">
+    <visual>
+      <geometry>
+        <box size="0.01 0.11089 0.233"/>
+      </geometry>
+      <material name="gray">
+        <color rgba="0.7 0.7 0.7 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.01 0.11089 0.233"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="CAP_R_WD_0_joint" type="fixed">
+    <parent link="odom"/>
+    <child link="CAP_R_WD_0_link"/>
+    <origin xyz="0.98439 0.42137 0.11650" rpy="0 0 0.78540"/>
+  </joint>
+
+  <link name="WALL_1_link">
+    <visual>
+      <geometry>
+        <box size="0.01 0.89984 0.233"/>
+      </geometry>
+      <material name="gray">
+        <color rgba="0.7 0.7 0.7 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.01 0.89984 0.233"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="WALL_1_joint" type="fixed">
+    <parent link="odom"/>
+    <child link="WALL_1_link"/>
+    <origin xyz="0.51500 0.89201 0.11650" rpy="0 0 1.04720"/>
+  </joint>
+
+  <link name="TAM_0_1_link">
+    <visual>
+      <geometry>
+        <box size="0.01 0.12523 0.233"/>
+      </geometry>
+      <material name="gray">
+        <color rgba="0.7 0.7 0.7 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.01 0.12523 0.233"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="TAM_0_1_joint" type="fixed">
+    <parent link="odom"/>
+    <child link="TAM_0_1_link"/>
+    <origin xyz="0.64203 0.66209 0.11650" rpy="0 0 2.61799"/>
+  </joint>
+
+  <link name="TAM_0_WU_1_link">
+    <visual>
+      <geometry>
+        <box size="0.01 0.11089 0.233"/>
+      </geometry>
+      <material name="gray">
+        <color rgba="0.7 0.7 0.7 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.01 0.11089 0.233"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="TAM_0_WU_1_joint" type="fixed">
+    <parent link="odom"/>
+    <child link="TAM_0_WU_1_link"/>
+    <origin xyz="0.71819 0.72203 0.11650" rpy="0 0 1.83260"/>
+  </joint>
+
+  <link name="TAM_0_WD_1_link">
+    <visual>
+      <geometry>
+        <box size="0.01 0.11089 0.233"/>
+      </geometry>
+      <material name="gray">
+        <color rgba="0.7 0.7 0.7 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.01 0.11089 0.233"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="TAM_0_WD_1_joint" type="fixed">
+    <parent link="odom"/>
+    <child link="TAM_0_WD_1_link"/>
+    <origin xyz="0.65584 0.75802 0.11650" rpy="0 0 3.40339"/>
+  </joint>
+
+  <link name="TAM_1_1_link">
+    <visual>
+      <geometry>
+        <box size="0.01 0.12523 0.233"/>
+      </geometry>
+      <material name="gray">
+        <color rgba="0.7 0.7 0.7 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.01 0.12523 0.233"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="TAM_1_1_joint" type="fixed">
+    <parent link="odom"/>
+    <child link="TAM_1_1_link"/>
+    <origin xyz="0.44720 0.77457 0.11650" rpy="0 0 2.61799"/>
+  </joint>
+
+  <link name="TAM_1_WU_1_link">
+    <visual>
+      <geometry>
+        <box size="0.01 0.11089 0.233"/>
+      </geometry>
+      <material name="gray">
+        <color rgba="0.7 0.7 0.7 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.01 0.11089 0.233"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="TAM_1_WU_1_joint" type="fixed">
+    <parent link="odom"/>
+    <child link="TAM_1_WU_1_link"/>
+    <origin xyz="0.52336 0.83451 0.11650" rpy="0 0 1.83260"/>
+  </joint>
+
+  <link name="TAM_1_WD_1_link">
+    <visual>
+      <geometry>
+        <box size="0.01 0.11089 0.233"/>
+      </geometry>
+      <material name="gray">
+        <color rgba="0.7 0.7 0.7 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.01 0.11089 0.233"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="TAM_1_WD_1_joint" type="fixed">
+    <parent link="odom"/>
+    <child link="TAM_1_WD_1_link"/>
+    <origin xyz="0.46102 0.87050 0.11650" rpy="0 0 3.40339"/>
+  </joint>
+
+  <link name="TAM_2_1_link">
+    <visual>
+      <geometry>
+        <box size="0.01 0.12523 0.233"/>
+      </geometry>
+      <material name="gray">
+        <color rgba="0.7 0.7 0.7 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.01 0.12523 0.233"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="TAM_2_1_joint" type="fixed">
+    <parent link="odom"/>
+    <child link="TAM_2_1_link"/>
+    <origin xyz="0.25238 0.88705 0.11650" rpy="0 0 2.61799"/>
+  </joint>
+
+  <link name="TAM_2_WU_1_link">
+    <visual>
+      <geometry>
+        <box size="0.01 0.11089 0.233"/>
+      </geometry>
+      <material name="gray">
+        <color rgba="0.7 0.7 0.7 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.01 0.11089 0.233"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="TAM_2_WU_1_joint" type="fixed">
+    <parent link="odom"/>
+    <child link="TAM_2_WU_1_link"/>
+    <origin xyz="0.32854 0.94699 0.11650" rpy="0 0 1.83260"/>
+  </joint>
+
+  <link name="TAM_2_WD_1_link">
+    <visual>
+      <geometry>
+        <box size="0.01 0.11089 0.233"/>
+      </geometry>
+      <material name="gray">
+        <color rgba="0.7 0.7 0.7 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.01 0.11089 0.233"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="TAM_2_WD_1_joint" type="fixed">
+    <parent link="odom"/>
+    <child link="TAM_2_WD_1_link"/>
+    <origin xyz="0.26620 0.98298 0.11650" rpy="0 0 3.40339"/>
+  </joint>
+
+  <link name="CAP_L_1_link">
+    <visual>
+      <geometry>
+        <box size="0.01 0.16422 0.233"/>
+      </geometry>
+      <material name="gray">
+        <color rgba="0.7 0.7 0.7 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.01 0.16422 0.233"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="CAP_L_1_joint" type="fixed">
+    <parent link="odom"/>
+    <child link="CAP_L_1_link"/>
+    <origin xyz="0.82828 0.51992 0.11650" rpy="0 0 2.61799"/>
+  </joint>
+
+  <link name="CAP_L_WU_1_link">
+    <visual>
+      <geometry>
+        <box size="0.01 0.11089 0.233"/>
+      </geometry>
+      <material name="gray">
+        <color rgba="0.7 0.7 0.7 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.01 0.11089 0.233"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="CAP_L_WU_1_joint" type="fixed">
+    <parent link="odom"/>
+    <child link="CAP_L_WU_1_link"/>
+    <origin xyz="0.85711 0.64182 0.11650" rpy="0 0 3.40339"/>
+  </joint>
+
+  <link name="CAP_R_1_link">
+    <visual>
+      <geometry>
+        <box size="0.01 0.16422 0.233"/>
+      </geometry>
+      <material name="gray">
+        <color rgba="0.7 0.7 0.7 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.01 0.16422 0.233"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="CAP_R_1_joint" type="fixed">
+    <parent link="odom"/>
+    <child link="CAP_R_1_link"/>
+    <origin xyz="0.03612 0.97728 0.11650" rpy="0 0 2.61799"/>
+  </joint>
+
+  <link name="CAP_R_WD_1_link">
+    <visual>
+      <geometry>
+        <box size="0.01 0.11089 0.233"/>
+      </geometry>
+      <material name="gray">
+        <color rgba="0.7 0.7 0.7 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.01 0.11089 0.233"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="CAP_R_WD_1_joint" type="fixed">
+    <parent link="odom"/>
+    <child link="CAP_R_WD_1_link"/>
+    <origin xyz="0.12728 1.06319 0.11650" rpy="0 0 1.83260"/>
+  </joint>
+
+  <link name="WALL_2_link">
+    <visual>
+      <geometry>
+        <box size="0.01 0.89984 0.233"/>
+      </geometry>
+      <material name="gray">
+        <color rgba="0.7 0.7 0.7 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.01 0.89984 0.233"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="WALL_2_joint" type="fixed">
+    <parent link="odom"/>
+    <child link="WALL_2_link"/>
+    <origin xyz="-0.51500 0.89201 0.11650" rpy="0 0 2.09440"/>
+  </joint>
+
+  <link name="TAM_0_2_link">
+    <visual>
+      <geometry>
+        <box size="0.01 0.12523 0.233"/>
+      </geometry>
+      <material name="gray">
+        <color rgba="0.7 0.7 0.7 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.01 0.12523 0.233"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="TAM_0_2_joint" type="fixed">
+    <parent link="odom"/>
+    <child link="TAM_0_2_link"/>
+    <origin xyz="-0.25238 0.88705 0.11650" rpy="0 0 3.66519"/>
+  </joint>
+
+  <link name="TAM_0_WU_2_link">
+    <visual>
+      <geometry>
+        <box size="0.01 0.11089 0.233"/>
+      </geometry>
+      <material name="gray">
+        <color rgba="0.7 0.7 0.7 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.01 0.11089 0.233"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="TAM_0_WU_2_joint" type="fixed">
+    <parent link="odom"/>
+    <child link="TAM_0_WU_2_link"/>
+    <origin xyz="-0.26620 0.98298 0.11650" rpy="0 0 2.87979"/>
+  </joint>
+
+  <link name="TAM_0_WD_2_link">
+    <visual>
+      <geometry>
+        <box size="0.01 0.11089 0.233"/>
+      </geometry>
+      <material name="gray">
+        <color rgba="0.7 0.7 0.7 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.01 0.11089 0.233"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="TAM_0_WD_2_joint" type="fixed">
+    <parent link="odom"/>
+    <child link="TAM_0_WD_2_link"/>
+    <origin xyz="-0.32854 0.94699 0.11650" rpy="0 0 4.45059"/>
+  </joint>
+
+  <link name="TAM_1_2_link">
+    <visual>
+      <geometry>
+        <box size="0.01 0.12523 0.233"/>
+      </geometry>
+      <material name="gray">
+        <color rgba="0.7 0.7 0.7 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.01 0.12523 0.233"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="TAM_1_2_joint" type="fixed">
+    <parent link="odom"/>
+    <child link="TAM_1_2_link"/>
+    <origin xyz="-0.44720 0.77457 0.11650" rpy="0 0 3.66519"/>
+  </joint>
+
+  <link name="TAM_1_WU_2_link">
+    <visual>
+      <geometry>
+        <box size="0.01 0.11089 0.233"/>
+      </geometry>
+      <material name="gray">
+        <color rgba="0.7 0.7 0.7 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.01 0.11089 0.233"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="TAM_1_WU_2_joint" type="fixed">
+    <parent link="odom"/>
+    <child link="TAM_1_WU_2_link"/>
+    <origin xyz="-0.46102 0.87050 0.11650" rpy="0 0 2.87979"/>
+  </joint>
+
+  <link name="TAM_1_WD_2_link">
+    <visual>
+      <geometry>
+        <box size="0.01 0.11089 0.233"/>
+      </geometry>
+      <material name="gray">
+        <color rgba="0.7 0.7 0.7 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.01 0.11089 0.233"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="TAM_1_WD_2_joint" type="fixed">
+    <parent link="odom"/>
+    <child link="TAM_1_WD_2_link"/>
+    <origin xyz="-0.52336 0.83451 0.11650" rpy="0 0 4.45059"/>
+  </joint>
+
+  <link name="TAM_2_2_link">
+    <visual>
+      <geometry>
+        <box size="0.01 0.12523 0.233"/>
+      </geometry>
+      <material name="gray">
+        <color rgba="0.7 0.7 0.7 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.01 0.12523 0.233"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="TAM_2_2_joint" type="fixed">
+    <parent link="odom"/>
+    <child link="TAM_2_2_link"/>
+    <origin xyz="-0.64203 0.66209 0.11650" rpy="0 0 3.66519"/>
+  </joint>
+
+  <link name="TAM_2_WU_2_link">
+    <visual>
+      <geometry>
+        <box size="0.01 0.11089 0.233"/>
+      </geometry>
+      <material name="gray">
+        <color rgba="0.7 0.7 0.7 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.01 0.11089 0.233"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="TAM_2_WU_2_joint" type="fixed">
+    <parent link="odom"/>
+    <child link="TAM_2_WU_2_link"/>
+    <origin xyz="-0.65584 0.75802 0.11650" rpy="0 0 2.87979"/>
+  </joint>
+
+  <link name="TAM_2_WD_2_link">
+    <visual>
+      <geometry>
+        <box size="0.01 0.11089 0.233"/>
+      </geometry>
+      <material name="gray">
+        <color rgba="0.7 0.7 0.7 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.01 0.11089 0.233"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="TAM_2_WD_2_joint" type="fixed">
+    <parent link="odom"/>
+    <child link="TAM_2_WD_2_link"/>
+    <origin xyz="-0.71819 0.72203 0.11650" rpy="0 0 4.45059"/>
+  </joint>
+
+  <link name="CAP_L_2_link">
+    <visual>
+      <geometry>
+        <box size="0.01 0.16422 0.233"/>
+      </geometry>
+      <material name="gray">
+        <color rgba="0.7 0.7 0.7 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.01 0.16422 0.233"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="CAP_L_2_joint" type="fixed">
+    <parent link="odom"/>
+    <child link="CAP_L_2_link"/>
+    <origin xyz="-0.03612 0.97728 0.11650" rpy="0 0 3.66519"/>
+  </joint>
+
+  <link name="CAP_L_WU_2_link">
+    <visual>
+      <geometry>
+        <box size="0.01 0.11089 0.233"/>
+      </geometry>
+      <material name="gray">
+        <color rgba="0.7 0.7 0.7 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.01 0.11089 0.233"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="CAP_L_WU_2_joint" type="fixed">
+    <parent link="odom"/>
+    <child link="CAP_L_WU_2_link"/>
+    <origin xyz="-0.12728 1.06319 0.11650" rpy="0 0 4.45059"/>
+  </joint>
+
+  <link name="CAP_R_2_link">
+    <visual>
+      <geometry>
+        <box size="0.01 0.16422 0.233"/>
+      </geometry>
+      <material name="gray">
+        <color rgba="0.7 0.7 0.7 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.01 0.16422 0.233"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="CAP_R_2_joint" type="fixed">
+    <parent link="odom"/>
+    <child link="CAP_R_2_link"/>
+    <origin xyz="-0.82828 0.51992 0.11650" rpy="0 0 3.66519"/>
+  </joint>
+
+  <link name="CAP_R_WD_2_link">
+    <visual>
+      <geometry>
+        <box size="0.01 0.11089 0.233"/>
+      </geometry>
+      <material name="gray">
+        <color rgba="0.7 0.7 0.7 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.01 0.11089 0.233"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="CAP_R_WD_2_joint" type="fixed">
+    <parent link="odom"/>
+    <child link="CAP_R_WD_2_link"/>
+    <origin xyz="-0.85711 0.64182 0.11650" rpy="0 0 2.87979"/>
+  </joint>
+
+  <link name="WALL_3_link">
+    <visual>
+      <geometry>
+        <box size="0.01 0.89984 0.233"/>
+      </geometry>
+      <material name="gray">
+        <color rgba="0.7 0.7 0.7 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.01 0.89984 0.233"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="WALL_3_joint" type="fixed">
+    <parent link="odom"/>
+    <child link="WALL_3_link"/>
+    <origin xyz="-1.03000 0.00000 0.11650" rpy="0 0 3.14159"/>
+  </joint>
+
+  <link name="TAM_0_3_link">
+    <visual>
+      <geometry>
+        <box size="0.01 0.12523 0.233"/>
+      </geometry>
+      <material name="gray">
+        <color rgba="0.7 0.7 0.7 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.01 0.12523 0.233"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="TAM_0_3_joint" type="fixed">
+    <parent link="odom"/>
+    <child link="TAM_0_3_link"/>
+    <origin xyz="-0.89440 0.22496 0.11650" rpy="0 0 4.71239"/>
+  </joint>
+
+  <link name="TAM_0_WU_3_link">
+    <visual>
+      <geometry>
+        <box size="0.01 0.11089 0.233"/>
+      </geometry>
+      <material name="gray">
+        <color rgba="0.7 0.7 0.7 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.01 0.11089 0.233"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="TAM_0_WU_3_joint" type="fixed">
+    <parent link="odom"/>
+    <child link="TAM_0_WU_3_link"/>
+    <origin xyz="-0.98439 0.26095 0.11650" rpy="0 0 3.92699"/>
+  </joint>
+
+  <link name="TAM_0_WD_3_link">
+    <visual>
+      <geometry>
+        <box size="0.01 0.11089 0.233"/>
+      </geometry>
+      <material name="gray">
+        <color rgba="0.7 0.7 0.7 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.01 0.11089 0.233"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="TAM_0_WD_3_joint" type="fixed">
+    <parent link="odom"/>
+    <child link="TAM_0_WD_3_link"/>
+    <origin xyz="-0.98439 0.18897 0.11650" rpy="0 0 5.49779"/>
+  </joint>
+
+  <link name="TAM_1_3_link">
+    <visual>
+      <geometry>
+        <box size="0.01 0.12523 0.233"/>
+      </geometry>
+      <material name="gray">
+        <color rgba="0.7 0.7 0.7 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.01 0.12523 0.233"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="TAM_1_3_joint" type="fixed">
+    <parent link="odom"/>
+    <child link="TAM_1_3_link"/>
+    <origin xyz="-0.89440 0.00000 0.11650" rpy="0 0 4.71239"/>
+  </joint>
+
+  <link name="TAM_1_WU_3_link">
+    <visual>
+      <geometry>
+        <box size="0.01 0.11089 0.233"/>
+      </geometry>
+      <material name="gray">
+        <color rgba="0.7 0.7 0.7 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.01 0.11089 0.233"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="TAM_1_WU_3_joint" type="fixed">
+    <parent link="odom"/>
+    <child link="TAM_1_WU_3_link"/>
+    <origin xyz="-0.98439 0.03599 0.11650" rpy="0 0 3.92699"/>
+  </joint>
+
+  <link name="TAM_1_WD_3_link">
+    <visual>
+      <geometry>
+        <box size="0.01 0.11089 0.233"/>
+      </geometry>
+      <material name="gray">
+        <color rgba="0.7 0.7 0.7 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.01 0.11089 0.233"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="TAM_1_WD_3_joint" type="fixed">
+    <parent link="odom"/>
+    <child link="TAM_1_WD_3_link"/>
+    <origin xyz="-0.98439 -0.03599 0.11650" rpy="0 0 5.49779"/>
+  </joint>
+
+  <link name="TAM_2_3_link">
+    <visual>
+      <geometry>
+        <box size="0.01 0.12523 0.233"/>
+      </geometry>
+      <material name="gray">
+        <color rgba="0.7 0.7 0.7 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.01 0.12523 0.233"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="TAM_2_3_joint" type="fixed">
+    <parent link="odom"/>
+    <child link="TAM_2_3_link"/>
+    <origin xyz="-0.89440 -0.22496 0.11650" rpy="0 0 4.71239"/>
+  </joint>
+
+  <link name="TAM_2_WU_3_link">
+    <visual>
+      <geometry>
+        <box size="0.01 0.11089 0.233"/>
+      </geometry>
+      <material name="gray">
+        <color rgba="0.7 0.7 0.7 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.01 0.11089 0.233"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="TAM_2_WU_3_joint" type="fixed">
+    <parent link="odom"/>
+    <child link="TAM_2_WU_3_link"/>
+    <origin xyz="-0.98439 -0.18897 0.11650" rpy="0 0 3.92699"/>
+  </joint>
+
+  <link name="TAM_2_WD_3_link">
+    <visual>
+      <geometry>
+        <box size="0.01 0.11089 0.233"/>
+      </geometry>
+      <material name="gray">
+        <color rgba="0.7 0.7 0.7 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.01 0.11089 0.233"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="TAM_2_WD_3_joint" type="fixed">
+    <parent link="odom"/>
+    <child link="TAM_2_WD_3_link"/>
+    <origin xyz="-0.98439 -0.26095 0.11650" rpy="0 0 5.49779"/>
+  </joint>
+
+  <link name="CAP_L_3_link">
+    <visual>
+      <geometry>
+        <box size="0.01 0.16422 0.233"/>
+      </geometry>
+      <material name="gray">
+        <color rgba="0.7 0.7 0.7 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.01 0.16422 0.233"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="CAP_L_3_joint" type="fixed">
+    <parent link="odom"/>
+    <child link="CAP_L_3_link"/>
+    <origin xyz="-0.86441 0.45736 0.11650" rpy="0 0 4.71239"/>
+  </joint>
+
+  <link name="CAP_L_WU_3_link">
+    <visual>
+      <geometry>
+        <box size="0.01 0.11089 0.233"/>
+      </geometry>
+      <material name="gray">
+        <color rgba="0.7 0.7 0.7 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.01 0.11089 0.233"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="CAP_L_WU_3_joint" type="fixed">
+    <parent link="odom"/>
+    <child link="CAP_L_WU_3_link"/>
+    <origin xyz="-0.98439 0.42137 0.11650" rpy="0 0 5.49779"/>
+  </joint>
+
+  <link name="CAP_R_3_link">
+    <visual>
+      <geometry>
+        <box size="0.01 0.16422 0.233"/>
+      </geometry>
+      <material name="gray">
+        <color rgba="0.7 0.7 0.7 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.01 0.16422 0.233"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="CAP_R_3_joint" type="fixed">
+    <parent link="odom"/>
+    <child link="CAP_R_3_link"/>
+    <origin xyz="-0.86441 -0.45736 0.11650" rpy="0 0 4.71239"/>
+  </joint>
+
+  <link name="CAP_R_WD_3_link">
+    <visual>
+      <geometry>
+        <box size="0.01 0.11089 0.233"/>
+      </geometry>
+      <material name="gray">
+        <color rgba="0.7 0.7 0.7 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.01 0.11089 0.233"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="CAP_R_WD_3_joint" type="fixed">
+    <parent link="odom"/>
+    <child link="CAP_R_WD_3_link"/>
+    <origin xyz="-0.98439 -0.42137 0.11650" rpy="0 0 3.92699"/>
+  </joint>
+
+  <link name="WALL_4_link">
+    <visual>
+      <geometry>
+        <box size="0.01 0.89984 0.233"/>
+      </geometry>
+      <material name="gray">
+        <color rgba="0.7 0.7 0.7 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.01 0.89984 0.233"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="WALL_4_joint" type="fixed">
+    <parent link="odom"/>
+    <child link="WALL_4_link"/>
+    <origin xyz="-0.51500 -0.89201 0.11650" rpy="0 0 4.18879"/>
+  </joint>
+
+  <link name="TAM_0_4_link">
+    <visual>
+      <geometry>
+        <box size="0.01 0.12523 0.233"/>
+      </geometry>
+      <material name="gray">
+        <color rgba="0.7 0.7 0.7 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.01 0.12523 0.233"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="TAM_0_4_joint" type="fixed">
+    <parent link="odom"/>
+    <child link="TAM_0_4_link"/>
+    <origin xyz="-0.64203 -0.66209 0.11650" rpy="0 0 5.75959"/>
+  </joint>
+
+  <link name="TAM_0_WU_4_link">
+    <visual>
+      <geometry>
+        <box size="0.01 0.11089 0.233"/>
+      </geometry>
+      <material name="gray">
+        <color rgba="0.7 0.7 0.7 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.01 0.11089 0.233"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="TAM_0_WU_4_joint" type="fixed">
+    <parent link="odom"/>
+    <child link="TAM_0_WU_4_link"/>
+    <origin xyz="-0.71819 -0.72203 0.11650" rpy="0 0 4.97419"/>
+  </joint>
+
+  <link name="TAM_0_WD_4_link">
+    <visual>
+      <geometry>
+        <box size="0.01 0.11089 0.233"/>
+      </geometry>
+      <material name="gray">
+        <color rgba="0.7 0.7 0.7 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.01 0.11089 0.233"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="TAM_0_WD_4_joint" type="fixed">
+    <parent link="odom"/>
+    <child link="TAM_0_WD_4_link"/>
+    <origin xyz="-0.65584 -0.75802 0.11650" rpy="0 0 0.26180"/>
+  </joint>
+
+  <link name="TAM_1_4_link">
+    <visual>
+      <geometry>
+        <box size="0.01 0.12523 0.233"/>
+      </geometry>
+      <material name="gray">
+        <color rgba="0.7 0.7 0.7 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.01 0.12523 0.233"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="TAM_1_4_joint" type="fixed">
+    <parent link="odom"/>
+    <child link="TAM_1_4_link"/>
+    <origin xyz="-0.44720 -0.77457 0.11650" rpy="0 0 5.75959"/>
+  </joint>
+
+  <link name="TAM_1_WU_4_link">
+    <visual>
+      <geometry>
+        <box size="0.01 0.11089 0.233"/>
+      </geometry>
+      <material name="gray">
+        <color rgba="0.7 0.7 0.7 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.01 0.11089 0.233"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="TAM_1_WU_4_joint" type="fixed">
+    <parent link="odom"/>
+    <child link="TAM_1_WU_4_link"/>
+    <origin xyz="-0.52336 -0.83451 0.11650" rpy="0 0 4.97419"/>
+  </joint>
+
+  <link name="TAM_1_WD_4_link">
+    <visual>
+      <geometry>
+        <box size="0.01 0.11089 0.233"/>
+      </geometry>
+      <material name="gray">
+        <color rgba="0.7 0.7 0.7 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.01 0.11089 0.233"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="TAM_1_WD_4_joint" type="fixed">
+    <parent link="odom"/>
+    <child link="TAM_1_WD_4_link"/>
+    <origin xyz="-0.46102 -0.87050 0.11650" rpy="0 0 0.26180"/>
+  </joint>
+
+  <link name="TAM_2_4_link">
+    <visual>
+      <geometry>
+        <box size="0.01 0.12523 0.233"/>
+      </geometry>
+      <material name="gray">
+        <color rgba="0.7 0.7 0.7 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.01 0.12523 0.233"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="TAM_2_4_joint" type="fixed">
+    <parent link="odom"/>
+    <child link="TAM_2_4_link"/>
+    <origin xyz="-0.25238 -0.88705 0.11650" rpy="0 0 5.75959"/>
+  </joint>
+
+  <link name="TAM_2_WU_4_link">
+    <visual>
+      <geometry>
+        <box size="0.01 0.11089 0.233"/>
+      </geometry>
+      <material name="gray">
+        <color rgba="0.7 0.7 0.7 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.01 0.11089 0.233"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="TAM_2_WU_4_joint" type="fixed">
+    <parent link="odom"/>
+    <child link="TAM_2_WU_4_link"/>
+    <origin xyz="-0.32854 -0.94699 0.11650" rpy="0 0 4.97419"/>
+  </joint>
+
+  <link name="TAM_2_WD_4_link">
+    <visual>
+      <geometry>
+        <box size="0.01 0.11089 0.233"/>
+      </geometry>
+      <material name="gray">
+        <color rgba="0.7 0.7 0.7 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.01 0.11089 0.233"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="TAM_2_WD_4_joint" type="fixed">
+    <parent link="odom"/>
+    <child link="TAM_2_WD_4_link"/>
+    <origin xyz="-0.26620 -0.98298 0.11650" rpy="0 0 0.26180"/>
+  </joint>
+
+  <link name="CAP_L_4_link">
+    <visual>
+      <geometry>
+        <box size="0.01 0.16422 0.233"/>
+      </geometry>
+      <material name="gray">
+        <color rgba="0.7 0.7 0.7 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.01 0.16422 0.233"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="CAP_L_4_joint" type="fixed">
+    <parent link="odom"/>
+    <child link="CAP_L_4_link"/>
+    <origin xyz="-0.82828 -0.51992 0.11650" rpy="0 0 5.75959"/>
+  </joint>
+
+  <link name="CAP_L_WU_4_link">
+    <visual>
+      <geometry>
+        <box size="0.01 0.11089 0.233"/>
+      </geometry>
+      <material name="gray">
+        <color rgba="0.7 0.7 0.7 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.01 0.11089 0.233"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="CAP_L_WU_4_joint" type="fixed">
+    <parent link="odom"/>
+    <child link="CAP_L_WU_4_link"/>
+    <origin xyz="-0.85711 -0.64182 0.11650" rpy="0 0 0.26180"/>
+  </joint>
+
+  <link name="CAP_R_4_link">
+    <visual>
+      <geometry>
+        <box size="0.01 0.16422 0.233"/>
+      </geometry>
+      <material name="gray">
+        <color rgba="0.7 0.7 0.7 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.01 0.16422 0.233"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="CAP_R_4_joint" type="fixed">
+    <parent link="odom"/>
+    <child link="CAP_R_4_link"/>
+    <origin xyz="-0.03612 -0.97728 0.11650" rpy="0 0 5.75959"/>
+  </joint>
+
+  <link name="CAP_R_WD_4_link">
+    <visual>
+      <geometry>
+        <box size="0.01 0.11089 0.233"/>
+      </geometry>
+      <material name="gray">
+        <color rgba="0.7 0.7 0.7 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.01 0.11089 0.233"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="CAP_R_WD_4_joint" type="fixed">
+    <parent link="odom"/>
+    <child link="CAP_R_WD_4_link"/>
+    <origin xyz="-0.12728 -1.06319 0.11650" rpy="0 0 4.97419"/>
+  </joint>
+
+  <link name="WALL_5_link">
+    <visual>
+      <geometry>
+        <box size="0.01 0.89984 0.233"/>
+      </geometry>
+      <material name="gray">
+        <color rgba="0.7 0.7 0.7 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.01 0.89984 0.233"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="WALL_5_joint" type="fixed">
+    <parent link="odom"/>
+    <child link="WALL_5_link"/>
+    <origin xyz="0.51500 -0.89201 0.11650" rpy="0 0 5.23599"/>
+  </joint>
+
+  <link name="TAM_0_5_link">
+    <visual>
+      <geometry>
+        <box size="0.01 0.12523 0.233"/>
+      </geometry>
+      <material name="gray">
+        <color rgba="0.7 0.7 0.7 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.01 0.12523 0.233"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="TAM_0_5_joint" type="fixed">
+    <parent link="odom"/>
+    <child link="TAM_0_5_link"/>
+    <origin xyz="0.25238 -0.88705 0.11650" rpy="0 0 0.52360"/>
+  </joint>
+
+  <link name="TAM_0_WU_5_link">
+    <visual>
+      <geometry>
+        <box size="0.01 0.11089 0.233"/>
+      </geometry>
+      <material name="gray">
+        <color rgba="0.7 0.7 0.7 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.01 0.11089 0.233"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="TAM_0_WU_5_joint" type="fixed">
+    <parent link="odom"/>
+    <child link="TAM_0_WU_5_link"/>
+    <origin xyz="0.26620 -0.98298 0.11650" rpy="0 0 6.02139"/>
+  </joint>
+
+  <link name="TAM_0_WD_5_link">
+    <visual>
+      <geometry>
+        <box size="0.01 0.11089 0.233"/>
+      </geometry>
+      <material name="gray">
+        <color rgba="0.7 0.7 0.7 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.01 0.11089 0.233"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="TAM_0_WD_5_joint" type="fixed">
+    <parent link="odom"/>
+    <child link="TAM_0_WD_5_link"/>
+    <origin xyz="0.32854 -0.94699 0.11650" rpy="0 0 1.30900"/>
+  </joint>
+
+  <link name="TAM_1_5_link">
+    <visual>
+      <geometry>
+        <box size="0.01 0.12523 0.233"/>
+      </geometry>
+      <material name="gray">
+        <color rgba="0.7 0.7 0.7 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.01 0.12523 0.233"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="TAM_1_5_joint" type="fixed">
+    <parent link="odom"/>
+    <child link="TAM_1_5_link"/>
+    <origin xyz="0.44720 -0.77457 0.11650" rpy="0 0 0.52360"/>
+  </joint>
+
+  <link name="TAM_1_WU_5_link">
+    <visual>
+      <geometry>
+        <box size="0.01 0.11089 0.233"/>
+      </geometry>
+      <material name="gray">
+        <color rgba="0.7 0.7 0.7 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.01 0.11089 0.233"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="TAM_1_WU_5_joint" type="fixed">
+    <parent link="odom"/>
+    <child link="TAM_1_WU_5_link"/>
+    <origin xyz="0.46102 -0.87050 0.11650" rpy="0 0 6.02139"/>
+  </joint>
+
+  <link name="TAM_1_WD_5_link">
+    <visual>
+      <geometry>
+        <box size="0.01 0.11089 0.233"/>
+      </geometry>
+      <material name="gray">
+        <color rgba="0.7 0.7 0.7 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.01 0.11089 0.233"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="TAM_1_WD_5_joint" type="fixed">
+    <parent link="odom"/>
+    <child link="TAM_1_WD_5_link"/>
+    <origin xyz="0.52336 -0.83451 0.11650" rpy="0 0 1.30900"/>
+  </joint>
+
+  <link name="TAM_2_5_link">
+    <visual>
+      <geometry>
+        <box size="0.01 0.12523 0.233"/>
+      </geometry>
+      <material name="gray">
+        <color rgba="0.7 0.7 0.7 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.01 0.12523 0.233"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="TAM_2_5_joint" type="fixed">
+    <parent link="odom"/>
+    <child link="TAM_2_5_link"/>
+    <origin xyz="0.64203 -0.66209 0.11650" rpy="0 0 0.52360"/>
+  </joint>
+
+  <link name="TAM_2_WU_5_link">
+    <visual>
+      <geometry>
+        <box size="0.01 0.11089 0.233"/>
+      </geometry>
+      <material name="gray">
+        <color rgba="0.7 0.7 0.7 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.01 0.11089 0.233"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="TAM_2_WU_5_joint" type="fixed">
+    <parent link="odom"/>
+    <child link="TAM_2_WU_5_link"/>
+    <origin xyz="0.65584 -0.75802 0.11650" rpy="0 0 6.02139"/>
+  </joint>
+
+  <link name="TAM_2_WD_5_link">
+    <visual>
+      <geometry>
+        <box size="0.01 0.11089 0.233"/>
+      </geometry>
+      <material name="gray">
+        <color rgba="0.7 0.7 0.7 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.01 0.11089 0.233"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="TAM_2_WD_5_joint" type="fixed">
+    <parent link="odom"/>
+    <child link="TAM_2_WD_5_link"/>
+    <origin xyz="0.71819 -0.72203 0.11650" rpy="0 0 1.30900"/>
+  </joint>
+
+  <link name="CAP_L_5_link">
+    <visual>
+      <geometry>
+        <box size="0.01 0.16422 0.233"/>
+      </geometry>
+      <material name="gray">
+        <color rgba="0.7 0.7 0.7 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.01 0.16422 0.233"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="CAP_L_5_joint" type="fixed">
+    <parent link="odom"/>
+    <child link="CAP_L_5_link"/>
+    <origin xyz="0.03612 -0.97728 0.11650" rpy="0 0 0.52360"/>
+  </joint>
+
+  <link name="CAP_L_WU_5_link">
+    <visual>
+      <geometry>
+        <box size="0.01 0.11089 0.233"/>
+      </geometry>
+      <material name="gray">
+        <color rgba="0.7 0.7 0.7 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.01 0.11089 0.233"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="CAP_L_WU_5_joint" type="fixed">
+    <parent link="odom"/>
+    <child link="CAP_L_WU_5_link"/>
+    <origin xyz="0.12728 -1.06319 0.11650" rpy="0 0 1.30900"/>
+  </joint>
+
+  <link name="CAP_R_5_link">
+    <visual>
+      <geometry>
+        <box size="0.01 0.16422 0.233"/>
+      </geometry>
+      <material name="gray">
+        <color rgba="0.7 0.7 0.7 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.01 0.16422 0.233"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="CAP_R_5_joint" type="fixed">
+    <parent link="odom"/>
+    <child link="CAP_R_5_link"/>
+    <origin xyz="0.82828 -0.51992 0.11650" rpy="0 0 0.52360"/>
+  </joint>
+
+  <link name="CAP_R_WD_5_link">
+    <visual>
+      <geometry>
+        <box size="0.01 0.11089 0.233"/>
+      </geometry>
+      <material name="gray">
+        <color rgba="0.7 0.7 0.7 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.01 0.11089 0.233"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="CAP_R_WD_5_joint" type="fixed">
+    <parent link="odom"/>
+    <child link="CAP_R_WD_5_link"/>
+    <origin xyz="0.85711 -0.64182 0.11650" rpy="0 0 6.02139"/>
+  </joint>
+
+</robot>

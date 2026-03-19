@@ -35,10 +35,28 @@
 	</node>
 
 
-	<param name="robot_description" command="$(find xacro)/xacro $(find system_descriptor)/urdf/base.xacro"/>
-	<node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher"/>
+	<group ns="arena">
+		<param name="robot_description" command="$(find xacro)/xacro $(find system_descriptor)/urdf/arena_octagon.urdf"/>
+		<node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher"/>
+	</group>
 
+	<group ns="epuck_10">
+		<param name="robot_description" command="$(find xacro)/xacro $(find system_descriptor)/urdf/base.xacro id_robot:=10"/>
+		<node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher"/>
+	</group>
 
+	<group ns="epuck_11">
+		<param name="robot_description" command="$(find xacro)/xacro $(find system_descriptor)/urdf/base.xacro id_robot:=11"/>
+		<node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher"/>
+	</group>
+	<group ns="epuck_12">
+		<param name="robot_description" command="$(find xacro)/xacro $(find system_descriptor)/urdf/base.xacro id_robot:=12"/>
+		<node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher"/>
+	</group>
+	<group ns="epuck_13">
+		<param name="robot_description" command="$(find xacro)/xacro $(find system_descriptor)/urdf/base.xacro id_robot:=13"/>
+		<node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher"/>
+	</group>
 
 	<node pkg="robot_localization" type="ukf_localization_node" name="ukf_se" clear_params="true" ns="epuck_0" output="screen">
 		<rosparam command="load" file="$(find launchers_pkg)/config/ukf_tycho.yaml" />

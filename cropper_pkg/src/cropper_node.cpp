@@ -13,9 +13,9 @@ public:
 		: image_transport_(node_handle_), mask_defined(false)
 	{
 		image_sub_ = image_transport_.subscribe("/image_rect_color", 1,
-		                                        &Cropper::imageCallback, this);
+												&Cropper::imageCallback, this);
 		image_pub_ = image_transport_.advertise("image_cropped", 1);
-		
+
 		// Retrieve vertices from YAML
 		std::vector<int> point;
 		int i = 0;
@@ -34,16 +34,16 @@ public:
 		}
 	}
 
-	void imageCallback(const sensor_msgs::ImageConstPtr& msg)
+	void imageCallback(const sensor_msgs::ImageConstPtr &msg)
 	{
 		cv_bridge::CvImagePtr cv_ptr;
 
 		try
 		{
 			cv_ptr = cv_bridge::toCvCopy(msg, sensor_msgs::image_encodings::BGR8);
-			//cv_ptr = cv_bridge::toCvCopy(msg, msg->encoding);
+			// cv_ptr = cv_bridge::toCvCopy(msg, msg->encoding);
 		}
-		catch (cv_bridge::Exception& e)
+		catch (cv_bridge::Exception &e)
 		{
 			ROS_ERROR("cv_bridge exception: %s", e.what());
 		}
@@ -66,7 +66,7 @@ public:
 
 		// Send image
 		out_msg_ = cv_bridge::CvImage(std_msgs::Header(msg->header), "bgr8", roi_).toImageMsg();
-		//out_msg_ = cv_bridge::CvImage(msg->header, msg->encoding, roi_).toImageMsg();
+		// out_msg_ = cv_bridge::CvImage(msg->header, msg->encoding, roi_).toImageMsg();
 		image_pub_.publish(out_msg_);
 	}
 
