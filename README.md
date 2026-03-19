@@ -7,7 +7,7 @@ making the program structure (~ it mean relative path, use only /catkin_ws into 
 ```
 mkdir -p ~/catkin_ws/src
 cd ~/catkin_ws/src
-git clone https://github.com/Walalex04/tracking-system-noetic.git
+git clone https://github.com/Walalex04/tracking-system-noetic.git src
 ```
 
 

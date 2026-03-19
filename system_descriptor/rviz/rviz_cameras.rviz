@@ -53,7 +53,7 @@ Visualization Manager:
       Value: true
     - Class: rviz/Image
       Enabled: true
-      Image Topic: /image_rect_color
+      Image Topic: /image_cropped
       Max Value: 1
       Median window: 5
       Min Value: 0
@@ -67,7 +67,7 @@ Visualization Manager:
     - Class: rviz/Camera
       Enabled: false
       Image Rendering: background and overlay
-      Image Topic: /image_raw
+      Image Topic: /image_cropped
       Name: Camera
       Overlay Alpha: 0.5
       Queue Size: 2
@@ -196,7 +196,7 @@ Visualization Manager:
   Global Options:
     Background Color: 48; 48; 48
     Default Light: true
-    Fixed Frame: odom
+    Fixed Frame: center_camera
     Frame Rate: 30
   Name: root
   Tools:
