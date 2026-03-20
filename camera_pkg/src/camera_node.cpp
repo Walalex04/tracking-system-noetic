@@ -6,7 +6,7 @@
 #include <opencv2/opencv.hpp>
 #include <camera_info_manager/camera_info_manager.h>
 
-int main(int argc, char** argv)
+int main(int argc, char **argv)
 {
     ros::init(argc, argv, "camera_node");
     ros::NodeHandle nh;
@@ -62,7 +62,7 @@ int main(int argc, char** argv)
         return -1;
     }
 
-    ros::Rate loop_rate(30);
+    ros::Rate loop_rate(15);
 
     while (ros::ok())
     {

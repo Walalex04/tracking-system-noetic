@@ -5,7 +5,7 @@
     <xacro:arg name="id_robot" default=""/>
 
     <xacro:property name="base_mass" value="1" />
-    <xacro:property name="base_scale" value="0.5 0.5 0.5" />
+    <xacro:property name="base_scale" value="1 1 1" />
 
     <xacro:macro name="base">
         <link name="base_link_$(arg id_robot)">

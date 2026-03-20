@@ -1,0 +1,62 @@
+<?xml version='1.0' encoding='utf-8'?>
+<launch>
+    <arg name="camera_width" default="1280" />
+    <arg name="camera_height" default="720" />
+    <rosparam file="$(find launchers_pkg)/config/system_configuration.yaml" command="load" />
+    <node pkg="tf2_ros" type="static_transform_publisher" name="center_camera_tf" args=".640 .360 0.0 0 0 0 odom center_camera" />
+    <node pkg="camera_pkg" type="camera_node" name="camera_node" output="screen">
+        <param name="camera_info_url" value="file://$(find camera_pkg)/config/camera_calibration_$(arg camera_width)x$(arg camera_height).yaml" />
+    </node>
+    <node pkg="image_proc" type="image_proc" name="image_proc" output="screen" />
+    <node pkg="cropper_pkg" type="cropper_node" name="cropper_node" output="screen">
+        <rosparam file="$(find cropper_pkg)/config/config_cropper.yaml" />
+    </node>
+    <node pkg="tracker_pkg" type="tracker_node" name="tracker_node" output="screen" />
+    <node pkg="tracker_pkg" type="transformer_node" name="transformer_node" output="screen">
+        <rosparam file="$(find tracker_pkg)/config/camera_transformer.yaml" />
+    </node>
+    <group ns="arena">
+        <param name="robot_description" command="$(find xacro)/xacro $(find system_descriptor)/urdf/arena_octagon.urdf" />
+        <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher" />
+    </group>
+    <group ns="epuck_10">
+        <param name="robot_description" command="$(find xacro)/xacro $(find system_descriptor)/urdf/base.xacro id_robot:=10" />
+        <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher" />
+    </group>
+    <node pkg="robot_localization" type="ukf_localization_node" name="ukf_se" clear_params="true" ns="epuck_10" output="screen">
+        <rosparam command="load" file="$(find launchers_pkg)/config/ukf_tycho.yaml" />
+        <param name="base_link_frame" value="base_link_10" />
+        <remap from="camera/odom" to="/epuck_10/odom" />
+    </node>
+    <group ns="epuck_11">
+        <param name="robot_description" command="$(find xacro)/xacro $(find system_descriptor)/urdf/base.xacro id_robot:=11" />
+        <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher" />
+    </group>
+    <node pkg="robot_localization" type="ukf_localization_node" name="ukf_se" clear_params="true" ns="epuck_11" output="screen">
+        <rosparam command="load" file="$(find launchers_pkg)/config/ukf_tycho.yaml" />
+        <param name="base_link_frame" value="base_link_11" />
+        <remap from="camera/odom" to="/epuck_11/odom" />
+    </node>
+    <group ns="epuck_12">
+        <param name="robot_description" command="$(find xacro)/xacro $(find system_descriptor)/urdf/base.xacro id_robot:=12" />
+        <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher" />
+    </group>
+    <node pkg="robot_localization" type="ukf_localization_node" name="ukf_se" clear_params="true" ns="epuck_12" output="screen">
+        <rosparam command="load" file="$(find launchers_pkg)/config/ukf_tycho.yaml" />
+        <param name="base_link_frame" value="base_link_12" />
+        <remap from="camera/odom" to="/epuck_12/odom" />
+    </node>
+    <group ns="epuck_13">
+        <param name="robot_description" command="$(find xacro)/xacro $(find system_descriptor)/urdf/base.xacro id_robot:=13" />
+        <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher" />
+    </group>
+    <node pkg="robot_localization" type="ukf_localization_node" name="ukf_se" clear_params="true" ns="epuck_13" output="screen">
+        <rosparam command="load" file="$(find launchers_pkg)/config/ukf_tycho.yaml" />
+        <param name="base_link_frame" value="base_link_13" />
+        <remap from="camera/odom" to="/epuck_13/odom" />
+    </node>
+    <node pkg="rosserial_python" type="serial_node.py" name="rosserial" output="screen">
+        <param name="port" value="/dev/ttyUSB0" />
+        <param name="baud" value="115200" />
+    </node>
+</launch>

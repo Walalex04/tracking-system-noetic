@@ -12,7 +12,7 @@
 	<rosparam file="$(find launchers_pkg)/config/system_configuration.yaml" command="load" />
 
 
-	<node pkg="tf2_ros" type="static_transform_publisher" name="center_camera_tf" args="640 360 0.0 0 0 0 odom center_camera" />
+	<node pkg="tf2_ros" type="static_transform_publisher" name="center_camera_tf" args=".640 .360 0.0 0 0 0 odom center_camera" />
 
 
 	<node pkg="camera_pkg" type="camera_node" name="camera_node" output="screen">

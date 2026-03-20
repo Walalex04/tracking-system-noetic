@@ -74,7 +74,7 @@ public:
 
 				std::stringstream ss;
 				ss << "epuck_" << robot_id;
-				robot_pose_msg.header.frame_id = "center_camera";
+				robot_pose_msg.header.frame_id = "odom";
 				ss.str("");
 				ss << "base_link_" << robot_id;
 				robot_pose_msg.child_frame_id = ss.str();
