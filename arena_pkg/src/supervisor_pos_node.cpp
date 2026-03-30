@@ -6,14 +6,16 @@
 #include <boost/bind.hpp>
 #include <opencv2/highgui.hpp>
 #include <opencv2/highgui/highgui.hpp>
-
+#include <stds_msgs/UInt8MultiArray.h>
 class SupervisorRobot
 {
 public:
     SupervisorRobot()
+        arena_status{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
     {
         // Publicador de ejemplo (si lo quieres usar)
         // pub_status_ = node_handle_.advertise<std_msgs::UInt8MultiArray>("status", 10);
+        pubStatusArena_ = node_handle_.adverstise<std_msgs::UInt8MultiArray>("arena_status", 10);
         std::vector<int> point;
         int i = 0;
         while (true)
@@ -30,6 +32,17 @@ public:
             i++;
         }
         discoverRobots();
+    }
+
+    void generatingRandomColor()
+    {
+        for (auto &element : arena_status)
+        {
+        }
+    }
+
+    void pub_arena_status()
+    {
     }
 
     // Callback de cada robot
@@ -81,11 +94,12 @@ public:
     }
 
 private:
-    ros::Publisher pub_status_;
+    ros::Publisher pubStatusArena_;
     ros::NodeHandle node_handle_;
     std::map<std::string, nav_msgs::Odometry> robot_states;
     std::map<std::string, ros::Subscriber> robot_subs;
     std::vector<cv::Point> points_tam;
+    std::vector<int> arena_status;
 };
 
 int main(int argc, char **argv)
