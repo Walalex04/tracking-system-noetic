@@ -43,25 +43,25 @@
 
 
 	<group ns="arena">
-		<param name="robot_description" command="$(find xacro)/xacro $(find system_descriptor)/urdf/arena_octagon.urdf"/>
+		<param name="robot_description" command="$(find xacro)/xacro '$(find system_descriptor)/urdf/arena_octagon.urdf'"/>
 		<node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher"/>
 	</group>
 
 	<group ns="epuck_10">
-		<param name="robot_description" command="$(find xacro)/xacro $(find system_descriptor)/urdf/base.xacro id_robot:=10"/>
+		<param name="robot_description" command="$(find xacro)/xacro '$(find system_descriptor)/urdf/base.xacro' id_robot:=10"/>
 		<node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher"/>
 	</group>
 
 	<group ns="epuck_11">
-		<param name="robot_description" command="$(find xacro)/xacro $(find system_descriptor)/urdf/base.xacro id_robot:=11"/>
+		<param name="robot_description" command="$(find xacro)/xacro '$(find system_descriptor)/urdf/base.xacro' id_robot:=11"/>
 		<node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher"/>
 	</group>
 	<group ns="epuck_12">
-		<param name="robot_description" command="$(find xacro)/xacro $(find system_descriptor)/urdf/base.xacro id_robot:=12"/>
+		<param name="robot_description" command="$(find xacro)/xacro '$(find system_descriptor)/urdf/base.xacro' id_robot:=12"/>
 		<node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher"/>
 	</group>
 	<group ns="epuck_13">
-		<param name="robot_description" command="$(find xacro)/xacro $(find system_descriptor)/urdf/base.xacro id_robot:=13"/>
+		<param name="robot_description" command="$(find xacro)/xacro '$(find system_descriptor)/urdf/base.xacro' id_robot:=13"/>
 		<node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher"/>
 	</group>
 
@@ -339,11 +339,11 @@
 	</node>
 
 
+	<!-- rosserial deshabilitado: sin robots físicos conectados
 	<node pkg="rosserial_python" type="serial_node.py" name="rosserial" output="screen">
-
 		<param name="port" value="/dev/ttyUSB0"/>
 		<param name="baud" value="115200"/>
-
 	</node>
+	-->
 
 </launch>

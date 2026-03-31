@@ -45,10 +45,13 @@ public:
 		parameters = cv::aruco::DetectorParameters::create();
 
 		// Modify parameters to improve marker detection
-		parameters->adaptiveThreshWinSizeMax = 21; // 9
+		parameters->adaptiveThreshWinSizeMin = 3;
+		parameters->adaptiveThreshWinSizeMax = 53;  // wider range handles more lighting variation
 		parameters->adaptiveThreshWinSizeStep = 2;
-		parameters->minDistanceToBorder = 3;		   // 0
-		parameters->perspectiveRemovePixelPerCell = 8; // 5
+		parameters->minDistanceToBorder = 1;
+		parameters->minMarkerPerimeterRate = 0.01;  // detect smaller/farther markers
+		parameters->perspectiveRemovePixelPerCell = 4; // lower = more tolerant for small markers
+		parameters->errorCorrectionRate = 0.9;      // more lenient dictionary matching
 		parameters->cornerRefinementMethod = cv::aruco::CORNER_REFINE_SUBPIX;
 
 		//// Kernel for image sharpening

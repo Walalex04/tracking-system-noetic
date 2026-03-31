@@ -13,6 +13,7 @@ public:
 	{
 		std::map<int, ros::Publisher> list_publishers;
 		std::map<int, nav_msgs::Odometry> list_messages;
+		std::map<int, nav_msgs::Odometry> last_valid_messages;
 		std::string ns;
 		double x_offset;
 		double y_offset;
@@ -145,22 +146,34 @@ public:
 								  0, 0, 0, 1e6, 0, 0,
 								  0, 0, 0, 0, 1e6, 0,
 								  0, 0, 0, 0, 0, 1e-2};*/
-				// Publish to corresponding topic
+				// Save last valid detection and publish to corresponding topic
+				transformer.last_valid_messages[robot_id] = robot_pose_msg;
 				transformer.list_messages.at(robot_id) = robot_pose_msg;
 			}
-
-			pub_markers();
 		}
+
+		// Always call pub_markers so the Kalman filter keeps receiving data
+		// even when no markers are detected (uses last known pose)
+		pub_markers();
 	}
 
 	void pub_markers()
 	{
+		ros::Time now = ros::Time::now();
 		for (int i = 0; i < 50; i++)
 		{
 			if (transformer.list_messages.at(i).header.stamp.sec != 0)
 			{
+				// Fresh detection: publish and clear
 				transformer.list_publishers.at(i).publish(transformer.list_messages.at(i));
 				transformer.list_messages.at(i).header.stamp.sec = 0;
+			}
+			else if (transformer.last_valid_messages.count(i) > 0)
+			{
+				// No new detection: republish last known pose with current timestamp
+				// to prevent the Kalman filter from diverging to NaN
+				transformer.last_valid_messages.at(i).header.stamp = now;
+				transformer.list_publishers.at(i).publish(transformer.last_valid_messages.at(i));
 			}
 		}
 
