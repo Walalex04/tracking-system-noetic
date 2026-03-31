@@ -16,14 +16,14 @@ public:
 		: image_transport_(node_handle_), cropped(false), n_points(0), ratio_(0.8)
 	{
 		image_sub_ = image_transport_.subscribe("/image_rect", 1,
-		                                        &CropperCalibrator::imageCallback, this);
+												&CropperCalibrator::imageCallback, this);
 
-		//image_sub_ = image_transport_.subscribe("/video_frames", 1, &CropperCalibrator::imageCallback, this);
+		// image_sub_ = image_transport_.subscribe("/video_frames", 1, &CropperCalibrator::imageCallback, this);
 		pub_alive_ = node_handle_.advertise<std_msgs::Bool>("alive", 10);
-		
+
 		// Open YAML file to store the calibration parameters
-		std::string path = ros::package::getPath("track_sys") + "/config/config";
-		//std::string ros_namespace = ros::this_node::getNamespace();
+		std::string path = ros::package::getPath("cropper_pkg") + "/config/config";
+		// std::string ros_namespace = ros::this_node::getNamespace();
 		std::string filename = path + "_cropper.yaml";
 		yaml_.open(filename, std::fstream::out | std::fstream::trunc);
 		if (yaml_.is_open())
@@ -36,7 +36,7 @@ public:
 		}
 
 		// Get resizing ratio parameter
-		//node_handle_.getParam("calibrator/ratio", ratio_);
+		// node_handle_.getParam("calibrator/ratio", ratio_);
 		if (ratio_ < 0.0)
 		{
 			ROS_WARN("Resizing ratio must be positive. Using absolute value");
@@ -52,16 +52,16 @@ public:
 	bool cropped;
 	unsigned int n_points;
 
-	static void mouseCallback(int event, int x, int y, int flags, void* userdata)
+	static void mouseCallback(int event, int x, int y, int flags, void *userdata)
 	{
 		// Should perhaps check if userdata is not nullptr
-		CropperCalibrator* calibrator = reinterpret_cast<CropperCalibrator*>(userdata);
+		CropperCalibrator *calibrator = reinterpret_cast<CropperCalibrator *>(userdata);
 		calibrator->mouseCallback(event, x, y); // Calls class callback function, which is not static
 	}
 
 	void mouseCallback(int event, int x, int y)
 	{
-		if(event == cv::EVENT_RBUTTONDOWN)
+		if (event == cv::EVENT_RBUTTONDOWN)
 		{
 			std::cout << "Right mouse button clicked at (" << x << ", " << y << ")" << std::endl;
 			if (vertices_.size() < 2)
@@ -71,7 +71,7 @@ public:
 			}
 
 			// Close polygon
-			cv::line(img_resize_, vertices_[vertices_.size()-1], vertices_[0], cv::Scalar(0, 0, 0));
+			cv::line(img_resize_, vertices_[vertices_.size() - 1], vertices_[0], cv::Scalar(0, 0, 0));
 
 			cropped = true;
 
@@ -89,7 +89,7 @@ public:
 			else
 			{
 				// Second, or later click, draw line to previous vertex
-				cv::line(img_resize_, cv::Point(x, y), vertices_[vertices_.size()-1], cv::Scalar(0, 0, 0));
+				cv::line(img_resize_, cv::Point(x, y), vertices_[vertices_.size() - 1], cv::Scalar(0, 0, 0));
 			}
 
 			vertices_.push_back(cv::Point(x, y));
@@ -106,16 +106,16 @@ public:
 		}
 	}
 
-	void imageCallback(const sensor_msgs::ImageConstPtr& msg)
+	void imageCallback(const sensor_msgs::ImageConstPtr &msg)
 	{
 		cv_bridge::CvImagePtr cv_ptr;
 
 		try
 		{
-			//cv_ptr = cv_bridge::toCvCopy(msg, sensor_msgs::image_encodings::BGR8);
+			// cv_ptr = cv_bridge::toCvCopy(msg, sensor_msgs::image_encodings::BGR8);
 			cv_ptr = cv_bridge::toCvCopy(msg, msg->encoding);
 		}
-		catch (cv_bridge::Exception& e)
+		catch (cv_bridge::Exception &e)
 		{
 			ROS_ERROR("cv_bridge exception: %s", e.what());
 		}
@@ -129,7 +129,7 @@ public:
 		{
 			// Create a window
 
-		  cv::namedWindow("ImageDisplay", cv::WINDOW_AUTOSIZE);
+			cv::namedWindow("ImageDisplay", cv::WINDOW_AUTOSIZE);
 
 			// Register a mouse callback
 			cv::setMouseCallback("ImageDisplay", mouseCallback, this);

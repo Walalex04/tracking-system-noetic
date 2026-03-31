@@ -50,6 +50,7 @@
 	<group ns="epuck_10">
 		<param name="robot_description" command="$(find xacro)/xacro '$(find system_descriptor)/urdf/base.xacro' id_robot:=10"/>
 		<node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher"/>
+
 	</group>
 
 	<group ns="epuck_11">
@@ -345,5 +346,12 @@
 		<param name="baud" value="115200"/>
 	</node>
 	-->
+
+
+	<node pkg="arena_pkg" type="supervisor_pos_node" name="supervisor_pos_node" output="screen">
+
+		<rosparam file="$(find arena_pkg)/config/tam_points.yaml"/>
+
+	</node>
 
 </launch>
