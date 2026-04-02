@@ -6,16 +6,16 @@
 #include <boost/bind.hpp>
 #include <opencv2/highgui.hpp>
 #include <opencv2/highgui/highgui.hpp>
-#include <stds_msgs/UInt8MultiArray.h>
+#include <std_msgs/UInt8MultiArray.h>
 class SupervisorRobot
 {
 public:
     SupervisorRobot()
-        arena_status{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
+        : arena_status{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
     {
         // Publicador de ejemplo (si lo quieres usar)
         // pub_status_ = node_handle_.advertise<std_msgs::UInt8MultiArray>("status", 10);
-        pubStatusArena_ = node_handle_.adverstise<std_msgs::UInt8MultiArray>("arena_status", 10);
+        pubStatusArena_ = node_handle_.advertise<std_msgs::UInt8MultiArray>("arena_status", 10);
         std::vector<int> point;
         int i = 0;
         while (true)

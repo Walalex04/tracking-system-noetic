@@ -38,7 +38,7 @@ int main(int argc, char **argv)
         ROS_WARN("No se especificó camera_info_url");
     }
 
-    cv::VideoCapture cap(2);
+    cv::VideoCapture cap(0);
 
     int camera_width, camera_height;
     if (!nh.getParam("camera_width", camera_width))
@@ -62,7 +62,7 @@ int main(int argc, char **argv)
         return -1;
     }
 
-    ros::Rate loop_rate(15);
+    ros::Rate loop_rate(30);
 
     while (ros::ok())
     {

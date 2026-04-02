@@ -12,12 +12,11 @@ public:
 	TransformerCalibrator()
 		: done(false)
 	{
-		sub_tracker_ = node_handle_.subscribe("tracker/positions_stamped", 10, 
-		                                      &TransformerCalibrator::calibratorCallback, this);
+		sub_tracker_ = node_handle_.subscribe("tracker/positions_stamped", 10,
+											  &TransformerCalibrator::calibratorCallback, this);
 		pub_alive_ = node_handle_.advertise<std_msgs::Bool>("alive", 10);
 
-		// Open YAML file to store the calibration parameters
-		std::string path = ros::package::getPath("tycho_transformer") + "/config";
+		std::string path = ros::package::getPath("tracker_pkg") + "/config";
 		std::string ros_namespace = ros::this_node::getNamespace();
 		std::string filename = path + ros_namespace + "_transformer.yaml";
 		yaml_.open(filename, std::fstream::out | std::fstream::trunc);
@@ -44,69 +43,79 @@ public:
 
 	bool done;
 
-	// calibration_tags holds the IDs of the 9 tags used for calibration.
-	// The first tag is the one in the centre and the rest are given anti-clockwise,
-	// starting from 0 degrees with respect to the x-axis of the arena.
-	// Currently hardcoded and initialised in the constructor
-	const std::vector<int> calibration_tags = {38, 17, 37, 23, 31, 40, 22, 10, 45};
+	// NUEVOS TAGS
+	const int center_tag = 13;
+	const int tag_tr = 14;
+	const int tag_tl = 17;
+	const int tag_bl = 18;
+	const int tag_br = 19;
 
-	// grid_dim is the radius of the calibration board
-	const double grid_dim = 0.15;
-
-	void calibratorCallback(const std_msgs::UInt32MultiArrayConstPtr& msg)
+	void calibratorCallback(const std_msgs::UInt32MultiArrayConstPtr &msg)
 	{
-		// Process incoming message
 		int size = msg->data.size();
 
-		if (size == 83) // 2 for timestamp and 9 * 9 = 81 for the 9 entires of the 9 tags (ID and x-y coordinates of each corner)
+		// 🔥 CORREGIDO (antes era == 83)
+		if (size >= 47)
 		{
-			std::map<int, struct point> tags; // holds the ID and position of each tag
+			std::map<int, struct point> tags;
+
 			for (int i = 2; i < size; i += 9)
 			{
-				// Calculate position of the centre of each tag
 				struct point tag_centre = {0.0};
 				for (int j = 0; j < 4; ++j)
 				{
-					// Rotate 180 deg about y-axis
-					tag_centre.x -= static_cast<double>(msg->data.at(2*j + 1 + i)) / 4.0;
-					tag_centre.y += static_cast<double>(msg->data.at(2*j + 2 + i)) / 4.0;
+					tag_centre.x -= static_cast<double>(msg->data.at(2 * j + 1 + i)) / 4.0;
+					tag_centre.y += static_cast<double>(msg->data.at(2 * j + 2 + i)) / 4.0;
 				}
 
-				// Add tag to list
 				tags[msg->data.at(i)] = tag_centre;
 			}
 
-			// Calculate angular offset and scale factor
+			// Validación mínima
+			if (!(tags.count(center_tag) && tags.count(tag_tr) && tags.count(tag_tl) && tags.count(tag_bl)))
+				return;
+
+			// --- CALCULO ---
 			double angular_offset = 0.0;
 			double scale_factor = 0.0;
-			for (int i = 0; i < 4; ++i)
+
+			// PAR 1: Horizontal (14 ↔ 17)
 			{
-				double x1 = tags[calibration_tags.at(i+5)].x;
-				double y1 = tags[calibration_tags.at(i+5)].y;
-				double x2 = tags[calibration_tags.at(i+1)].x;
-				double y2 = tags[calibration_tags.at(i+1)].y;
+				double x1 = tags[tag_tr].x;
+				double y1 = tags[tag_tr].y;
+				double x2 = tags[tag_tl].x;
+				double y2 = tags[tag_tl].y;
 
-				// Angular offset
 				double orientation = std::atan2(y2 - y1, x2 - x1);
-				angular_offset += (orientation - i * M_PI_4) / 4.0;
+				angular_offset += (orientation - 0.0) / 2.0;
 
-				// Scale factor
 				double size = std::sqrt(std::pow(y2 - y1, 2) + std::pow(x2 - x1, 2));
-				scale_factor += size / 4.0;
+				scale_factor += (1.75 / size) / 2.0;
 			}
 
-			scale_factor = grid_dim * 2.0 / scale_factor;
+			// PAR 2: Vertical (17 ↔ 18)
+			{
+				double x1 = tags[tag_tl].x;
+				double y1 = tags[tag_tl].y;
+				double x2 = tags[tag_bl].x;
+				double y2 = tags[tag_bl].y;
 
-			// Write YAML file
-			yaml_ << "x_offset : " << tags[calibration_tags.at(0)].x << "\n";
-			yaml_ << "y_offset : " << tags[calibration_tags.at(0)].y << "\n";
+				double orientation = std::atan2(y2 - y1, x2 - x1);
+				angular_offset += (orientation - M_PI_2) / 2.0;
+
+				double size = std::sqrt(std::pow(y2 - y1, 2) + std::pow(x2 - x1, 2));
+				scale_factor += (1.37 / size) / 2.0;
+			}
+
+			// Guardar YAML
+			yaml_ << "x_offset : " << tags[center_tag].x << "\n";
+			yaml_ << "y_offset : " << tags[center_tag].y << "\n";
 			yaml_ << "angular_offset : " << angular_offset << "\n";
 			yaml_ << "scale_factor : " << scale_factor << "\n";
 
 			done = true;
 		}
 
-		// Let the supervisor node if calibration is still ongoing
 		std_msgs::Bool alive_msg;
 		alive_msg.data = !done;
 		pub_alive_.publish(alive_msg);

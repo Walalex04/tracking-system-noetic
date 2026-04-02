@@ -1,20 +1,22 @@
 #include <ros/ros.h>
 #include <std_msgs/UInt32MultiArray.h>
 #include <nav_msgs/Odometry.h>
+#include <tracker_pkg/RobotInfo.h>
 #include <tf2/LinearMath/Quaternion.h>
 #include <tf2_ros/transform_broadcaster.h>
 #include <tf2_geometry_msgs/tf2_geometry_msgs.h>
+#include <geometry_msgs/TransformStamped.h>
 #include <cmath>
+#include <map>
+#include <sstream>
 
 class Transformer
 {
 public:
 	struct transformerData
 	{
-		std::map<int, ros::Publisher> list_publishers;
-		std::map<int, nav_msgs::Odometry> list_messages;
-		std::map<int, nav_msgs::Odometry> last_valid_messages;
-		std::string ns;
+		std::map<int, ros::Publisher> info_publishers;
+
 		double x_offset;
 		double y_offset;
 		double angular_offset;
@@ -23,173 +25,136 @@ public:
 
 	Transformer()
 	{
-		// Empty pose mesage
-		nav_msgs::Odometry robot_pose_msg;
+		sub_tracker_ = node_handle_.subscribe(
+			"tracker/positions_stamped", 20,
+			&Transformer::transformerCallback, this);
 
-		// Topic you want to publish
-		for (int i = 0; i < 50; i++)
-		{
-			// Create topic name
-			char numstr[21];
-			std::string topic_prefix = "epuck_";
-			sprintf(numstr, "%d", i);
-			std::string topic_name = topic_prefix + numstr + "/odom";
-
-			// Add publisher to list of publishers
-			pub_odom_ = node_handle_.advertise<nav_msgs::Odometry>(topic_name, 20);
-			transformer.list_publishers.insert(std::pair<int, ros::Publisher>(i, pub_odom_));
-			transformer.list_messages.insert(std::pair<int, nav_msgs::Odometry>(i, robot_pose_msg));
-		}
-
-		// Topic you want to subscribe
-		sub_tracker_ = node_handle_.subscribe("tracker/positions_stamped", 20, &Transformer::transformerCallback, this);
-
-		// Get namespace
-		transformer.ns = "";
-
-		// Get config data
-		std::string param = "/transformer_node/x_offset";
-		node_handle_.getParam(param, transformer.x_offset);
-		param = "/transformer_node/y_offset";
-		node_handle_.getParam(param, transformer.y_offset);
-		param = "/transformer_node/angular_offset";
-		node_handle_.getParam(param, transformer.angular_offset);
-		param = "/transformer_node/scale_factor";
-		node_handle_.getParam(param, transformer.scale_factor);
+		node_handle_.param("/transformer_node/x_offset", transformer.x_offset, 0.0);
+		node_handle_.param("/transformer_node/y_offset", transformer.y_offset, 0.0);
+		node_handle_.param("/transformer_node/angular_offset", transformer.angular_offset, 0.0);
+		node_handle_.param("/transformer_node/scale_factor", transformer.scale_factor, 1.0);
 	}
 
-	void
-	transformerCallback(const std_msgs::UInt32MultiArrayConstPtr &msg)
+	void transformerCallback(const std_msgs::UInt32MultiArrayConstPtr &msg)
 	{
-		int size = msg->data.size(); // Get size of incoming list
+		int size = msg->data.size();
 
-		if (size > 2) // Timestamp is always in the first two entires
+		if (size > 2)
 		{
-			for (int i = 2; i < size; i += 9) // For each marker there is 9 integers of information: 1 for the id and 2 for each corner coordinate
+			for (int i = 2; i < size; i += 9)
 			{
-				// Create ROS message
-				nav_msgs::Odometry robot_pose_msg;
-
-				// Set header
 				int robot_id = msg->data.at(i);
 
-				std::stringstream ss;
-				ss << "epuck_" << robot_id;
-				robot_pose_msg.header.frame_id = "odom";
-				ss.str("");
-				ss << "base_link_" << robot_id;
-				robot_pose_msg.child_frame_id = ss.str();
-				robot_pose_msg.header.stamp = ros::Time(msg->data.at(0), msg->data.at(1));
+				if (robot_id < 0)
+				{
+					ROS_WARN("ID invalido: %d", robot_id);
+					continue;
+				}
 
-				// Transform (translate + rotate + scale) every marker corner to the arena frame
-				std::vector<double> x(4);
-				std::vector<double> y(4);
+				// 🔹 Crear publisher dinámico
+				if (transformer.info_publishers.count(robot_id) == 0)
+				{
+					std::stringstream topic_info;
+					topic_info << "/epuck_" << robot_id << "/odom";
+
+					transformer.info_publishers[robot_id] =
+						node_handle_.advertise<tracker_pkg::RobotInfo>(topic_info.str(), 10);
+
+					ROS_INFO("Creado publisher INFO para robot %d", robot_id);
+				}
+
+				// =========================
+				// 🔹 CALCULO ODOM
+				// =========================
+				nav_msgs::Odometry robot_pose_msg;
+
+				robot_pose_msg.header.frame_id = "camera_optical_frame";
+				robot_pose_msg.header.stamp = ros::Time::now();
+
+				std::stringstream child;
+				child << "base_link_" << robot_id;
+				robot_pose_msg.child_frame_id = child.str();
+
+				std::vector<double> x(4), y(4);
+
 				for (int j = 0; j < 4; ++j)
 				{
-					// Rotate 180 deg about y-axis
 					int x_tracker = -msg->data.at(2 * j + 1 + i);
 					int y_tracker = msg->data.at(2 * j + 2 + i);
 
-					// Translate and scale
 					double x_tmp = (x_tracker - transformer.x_offset) * transformer.scale_factor;
 					double y_tmp = (y_tracker - transformer.y_offset) * transformer.scale_factor;
 
-					// Rotate about z-axis to align with arena frame
-					x.at(j) = x_tmp * cos(-transformer.angular_offset) - y_tmp * sin(-transformer.angular_offset);
-					y.at(j) = x_tmp * sin(-transformer.angular_offset) + y_tmp * cos(-transformer.angular_offset);
+					x[j] = x_tmp * cos(-transformer.angular_offset) - y_tmp * sin(-transformer.angular_offset);
+					y[j] = x_tmp * sin(-transformer.angular_offset) + y_tmp * cos(-transformer.angular_offset);
 				}
 
-				// Compute position of the center of the robot marker
-				double pose_x = 0.0;
-				double pose_y = 0.0;
+				double pose_x = 0.0, pose_y = 0.0;
 				for (int j = 0; j < 4; ++j)
 				{
-					pose_x += x.at(j) / 4.0;
-					pose_y += y.at(j) / 4.0;
+					pose_x += x[j] / 4.0;
+					pose_y += y[j] / 4.0;
 				}
 
 				robot_pose_msg.pose.pose.position.x = pose_x;
 				robot_pose_msg.pose.pose.position.y = pose_y;
 				robot_pose_msg.pose.pose.position.z = 0.0;
 
-				// Compute orientation (yaw in 2D) of the robot marker
-				// double pose_yaw = atan2(y.at(1) - y.at(0), x.at(1) - x.at(0));
-
-				double dx = x.at(1) - x.at(0);
-				double dy = y.at(1) - y.at(0);
+				double dx = x[1] - x[0];
+				double dy = y[1] - y[0];
 
 				if (std::fabs(dx) < 1e-6 && std::fabs(dy) < 1e-6)
 				{
-					ROS_WARN("Invalid marker orientation detected, skipping");
-					return;
+					ROS_WARN("Orientacion invalida en ID %d", robot_id);
+					continue;
 				}
 
-				double pose_yaw = atan2(dy, dx);
+				double yaw = atan2(dy, dx);
 
-				tf2::Quaternion orientation_quat;
-				orientation_quat.setRPY(0, 0, pose_yaw);
-				tf2::convert(orientation_quat, robot_pose_msg.pose.pose.orientation);
+				tf2::Quaternion q;
+				q.setRPY(0, 0, yaw);
+				tf2::convert(q, robot_pose_msg.pose.pose.orientation);
 
-				// Set covariance for the cameras
+				// 🔹 TF (esto sí lo dejas)
+				geometry_msgs::TransformStamped t;
+				t.header.stamp = robot_pose_msg.header.stamp;
+				t.header.frame_id = "camera_optical_frame";
+				t.child_frame_id = robot_pose_msg.child_frame_id;
 
-				robot_pose_msg.pose.covariance = {1e-6, 0.0, 0.0, 0.0, 0.0, 0.0,
-												  0.0, 1e-6, 0.0, 0.0, 0.0, 0.0,
-												  0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
-												  0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
-												  0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
-												  0.0, 0.0, 0.0, 0.0, 0.0, 1e-6};
+				t.transform.translation.x = pose_x;
+				t.transform.translation.y = pose_y;
+				t.transform.translation.z = 0.0;
+				t.transform.rotation = robot_pose_msg.pose.pose.orientation;
 
-				/*
-				robot_pose_msg.pose.covariance = {1e-3, 0, 0, 0, 0, 0,
-								  0, 1e-3, 0, 0, 0, 0,
-								  0, 0, 1e6, 0, 0, 0,
-								  0, 0, 0, 1e6, 0, 0,
-								  0, 0, 0, 0, 1e6, 0,
-								  0, 0, 0, 0, 0, 1e-2};*/
-				// Save last valid detection and publish to corresponding topic
-				transformer.last_valid_messages[robot_id] = robot_pose_msg;
-				transformer.list_messages.at(robot_id) = robot_pose_msg;
+				br_.sendTransform(t);
+
+				tracker_pkg::RobotInfo robot_info_msg;
+
+				robot_info_msg.odom = robot_pose_msg;
+
+				/*TO DO:
+					subscriber the correct topic to update this parameters
+				*/
+				robot_info_msg.robotstate = tracker_pkg::RobotInfo::WORKING;
+				robot_info_msg.typework = tracker_pkg::RobotInfo::NON_SPECIALIST;
+				robot_info_msg.timework = 0.0;
+
+				transformer.info_publishers[robot_id]
+					.publish(robot_info_msg);
 			}
 		}
-
-		// Always call pub_markers so the Kalman filter keeps receiving data
-		// even when no markers are detected (uses last known pose)
-		pub_markers();
-	}
-
-	void pub_markers()
-	{
-		ros::Time now = ros::Time::now();
-		for (int i = 0; i < 50; i++)
-		{
-			if (transformer.list_messages.at(i).header.stamp.sec != 0)
-			{
-				// Fresh detection: publish and clear
-				transformer.list_publishers.at(i).publish(transformer.list_messages.at(i));
-				transformer.list_messages.at(i).header.stamp.sec = 0;
-			}
-			else if (transformer.last_valid_messages.count(i) > 0)
-			{
-				// No new detection: republish last known pose with current timestamp
-				// to prevent the Kalman filter from diverging to NaN
-				transformer.last_valid_messages.at(i).header.stamp = now;
-				transformer.list_publishers.at(i).publish(transformer.last_valid_messages.at(i));
-			}
-		}
-
-		return;
 	}
 
 private:
-	ros::Publisher pub_odom_;
-	ros::Subscriber sub_tracker_;
 	ros::NodeHandle node_handle_;
+	ros::Subscriber sub_tracker_;
+	tf2_ros::TransformBroadcaster br_;
 };
 
 int main(int argc, char **argv)
 {
-	ros::init(argc, argv, "transformer");
-	Transformer transformer_object;
+	ros::init(argc, argv, "transformer_node");
+	Transformer transformer;
 	ros::spin();
 	return 0;
 }

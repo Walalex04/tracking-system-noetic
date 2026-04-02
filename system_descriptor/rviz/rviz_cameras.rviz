@@ -140,7 +140,7 @@ Visualization Manager:
     - Class: rviz/RobotModel
       Enabled: true
       Name: RobotModel
-      Robot Description: epuck_10/robot_description
+      Robot Description: epuck_18/robot_description
       Update Interval: 0.0
       TF Prefix: ""
       Visual Enabled: true
@@ -151,7 +151,7 @@ Visualization Manager:
     - Class: rviz/RobotModel
       Enabled: true
       Name: RobotModel
-      Robot Description: epuck_11/robot_description
+      Robot Description: epuck_17/robot_description
       Update Interval: 0.0
       TF Prefix: ""
       Visual Enabled: true
@@ -162,7 +162,7 @@ Visualization Manager:
     - Class: rviz/RobotModel
       Enabled: true
       Name: RobotModel
-      Robot Description: epuck_12/robot_description
+      Robot Description: epuck_14/robot_description
       Update Interval: 0.0
       TF Prefix: ""
       Visual Enabled: true
@@ -181,17 +181,19 @@ Visualization Manager:
       Alpha: 1.0
       Value: true
 
-
     - Class: rviz/RobotModel
       Enabled: true
       Name: RobotModel
-      Robot Description: arena/robot_description
+      Robot Description: epuck_19/robot_description
       Update Interval: 0.0
       TF Prefix: ""
       Visual Enabled: true
       Collision Enabled: false
       Alpha: 1.0
       Value: true
+
+
+
   Enabled: true
   Global Options:
     Background Color: 48; 48; 48

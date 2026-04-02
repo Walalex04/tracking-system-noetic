@@ -1,0 +1,102 @@
+Panels:
+  - Class: rviz/Displays
+    Name: Displays
+
+  - Class: rviz/Selection
+    Name: Selection
+
+  - Class: rviz/Tool Properties
+    Name: Tool Properties
+
+  - Class: rviz/Views
+    Name: Views
+
+  - Class: rviz/Time
+    Name: Time
+
+Visualization Manager:
+  Class: ""
+
+  Displays:
+
+
+    - Class: rviz/Grid
+      Name: Grid
+      Enabled: true
+      Plane: XY
+      Plane Cell Count: 200
+      Cell Size: 0.01
+      Color: 160; 160; 160
+
+    - Class: rviz/Image
+      Name: Image
+      Enabled: false
+      Image Topic: /image_rect
+
+
+    - Class: rviz/Camera
+      Name: Camera
+      Enabled: true
+      Image Topic: /image_rect
+      Image Rendering: background and overlay
+      Overlay Alpha: 1.0
+      Zoom Factor: 1
+
+    # 🔹 TF
+    - Class: rviz/TF
+      Name: TF
+      Enabled: true
+      Show Axes: true
+      Show Names: true
+      Marker Scale: 0.05
+      Frames:
+        All Enabled: false
+        camera:
+          Value: true
+        base_link_0:
+          Value: true
+        base_link_1:
+          Value: true
+        base_link_2:
+          Value: true
+        base_link_3:
+          Value: true
+        base_link_4:
+          Value: true
+        base_link_5:
+          Value: true
+        base_link_6:
+          Value: true
+        base_link_7:
+          Value: true
+        base_link_8:
+          Value: true
+
+  Enabled: true
+
+  Global Options:
+    Fixed Frame: camera_optical_frame   
+    Background Color: 48; 48; 48
+    Frame Rate: 30
+
+  Tools:
+    - Class: rviz/Interact
+    - Class: rviz/MoveCamera
+    - Class: rviz/Select
+    - Class: rviz/FocusCamera
+
+
+    - Class: rviz/Measure
+
+  Views:
+    Current:
+      Class: rviz/TopDownOrtho
+      Name: TopDown
+      Scale: 1000
+      Target Frame: camera
+      X: 0
+      Y: 0
+
+Window Geometry:
+  Width: 1200
+  Height: 800

@@ -1,10 +1,10 @@
 <launch>
 
 	<!--<env name="ROS_MASTER_URI" value="http://192.168.0.116:11311" /> -->
-	<!--<env name="ROS_IP" value="192.168.0.116" /> -->º
+	<!--<env name="ROS_IP" value="192.168.0.116" /> -->
 
-	<arg name="camera_width" default="1280"/>
-	<arg name="camera_height" default="720"/>
+	<arg name="camera_width" default="800"/>
+	<arg name="camera_height" default="600"/>
 
 
 
@@ -12,7 +12,11 @@
 	<rosparam file="$(find launchers_pkg)/config/system_configuration.yaml" command="load" />
 
 
-	<node pkg="tf2_ros" type="static_transform_publisher" name="center_camera_tf" args=".640 .360 0.0 0 0 0 odom center_camera" />
+	<node pkg="tf2_ros" type="static_transform_publisher" name="center_camera_tf" args="-0.6 -0.3 0.0 0 0 0 odom center_camera" />
+
+
+
+	<node pkg="tf" type="static_transform_publisher" name="camera_to_optical" args="0 0 0 -1.5708 0 -1.5708 camera camera_optical_frame 100" />
 
 
 	<node pkg="camera_pkg" type="camera_node" name="camera_node" output="screen">
@@ -37,15 +41,15 @@
 
 
 	<node name="transformer_node" pkg="tracker_pkg" type="transformer_node" output="screen">
-		<rosparam file="$(find tracker_pkg)/config/camera_transformer.yaml"/>
+		<rosparam file="$(find tracker_pkg)/config/_transformer.yaml"/>
 	</node>
 
 
 
-	<group ns="arena">
+	<!--<group ns="arena">
 		<param name="robot_description" command="$(find xacro)/xacro '$(find system_descriptor)/urdf/arena_octagon.urdf'"/>
 		<node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher"/>
-	</group>
+	</group> 
 
 	<group ns="epuck_10">
 		<param name="robot_description" command="$(find xacro)/xacro '$(find system_descriptor)/urdf/base.xacro' id_robot:=10"/>
@@ -339,19 +343,18 @@
 		<remap from="camera/odom" to="/epuck_38/odom"/>
 	</node>
 
-
-	<!-- rosserial deshabilitado: sin robots físicos conectados
+ rosserial deshabilitado: sin robots físicos conectados
 	<node pkg="rosserial_python" type="serial_node.py" name="rosserial" output="screen">
 		<param name="port" value="/dev/ttyUSB0"/>
 		<param name="baud" value="115200"/>
 	</node>
-	-->
+	
 
 
 	<node pkg="arena_pkg" type="supervisor_pos_node" name="supervisor_pos_node" output="screen">
 
 		<rosparam file="$(find arena_pkg)/config/tam_points.yaml"/>
 
-	</node>
+	</node> -->
 
 </launch>

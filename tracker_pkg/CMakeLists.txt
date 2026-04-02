@@ -14,6 +14,11 @@ find_package(catkin REQUIRED COMPONENTS
   roscpp
   rospy
   std_msgs
+  nav_msgs
+  tf2
+  tf2_ros
+  tf2_geometry_msgs
+  message_generation
 )
 
 ## System dependencies are found with CMake's conventions
@@ -56,6 +61,11 @@ find_package(catkin REQUIRED COMPONENTS
 #   Message2.msg
 # )
 
+add_message_files(
+  FILES
+  RobotInfo.msg
+)
+
 ## Generate services in the 'srv' folder
 # add_service_files(
 #   FILES
@@ -75,6 +85,13 @@ find_package(catkin REQUIRED COMPONENTS
 #   DEPENDENCIES
 #   std_msgs
 # )
+
+generate_messages(
+  DEPENDENCIES 
+  std_msgs
+  nav_msgs
+
+)
 
 ################################################
 ## Declare ROS dynamic reconfigure parameters ##
@@ -110,6 +127,7 @@ catkin_package(
 #  LIBRARIES tracker_pkg
 #  CATKIN_DEPENDS roscpp rospy std_msgs
 #  DEPENDS system_lib
+  CATKIN_DEPENDS roscpp std_msgs nav_msgs message_runtime
 )
 
 ###########

@@ -1,7 +1,7 @@
 
 
-camera_width: 1280
-camera_height: 720
+camera_width: 800
+camera_height: 600
 num_robots: 4
 ROS_MASTER_URI: "192.168.0.103"
 ROS_IP: "192.168.0.103"
