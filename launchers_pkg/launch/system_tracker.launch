@@ -45,6 +45,10 @@
 	</node>
 
 
+	<node name="supervisor_pos_node" pkg="arena_pkg" type="supervisor_pos_node" output="screen">
+		<rosparam file="$(find arena_pkg)/config/tam_points.yaml"/>
+	</node>
+
 
 	<!--<group ns="arena">
 		<param name="robot_description" command="$(find xacro)/xacro '$(find system_descriptor)/urdf/arena_octagon.urdf'"/>

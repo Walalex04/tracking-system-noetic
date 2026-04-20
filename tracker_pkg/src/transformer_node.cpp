@@ -51,7 +51,6 @@ public:
 					continue;
 				}
 
-				// 🔹 Crear publisher dinámico
 				if (transformer.info_publishers.count(robot_id) == 0)
 				{
 					std::stringstream topic_info;
@@ -63,9 +62,6 @@ public:
 					ROS_INFO("Creado publisher INFO para robot %d", robot_id);
 				}
 
-				// =========================
-				// 🔹 CALCULO ODOM
-				// =========================
 				nav_msgs::Odometry robot_pose_msg;
 
 				robot_pose_msg.header.frame_id = "camera_optical_frame";
@@ -135,9 +131,9 @@ public:
 				/*TO DO:
 					subscriber the correct topic to update this parameters
 				*/
-				robot_info_msg.robotstate = tracker_pkg::RobotInfo::WORKING;
+				robot_info_msg.robotstate = tracker_pkg::RobotInfo::RANDOMWALK;
 				robot_info_msg.typework = tracker_pkg::RobotInfo::NON_SPECIALIST;
-				robot_info_msg.timework = 0.0;
+				robot_info_msg.timework = 2;
 
 				transformer.info_publishers[robot_id]
 					.publish(robot_info_msg);

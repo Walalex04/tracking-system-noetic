@@ -7,12 +7,23 @@
 #include <opencv2/highgui/highgui.hpp>
 #include <cv_bridge/cv_bridge.h>
 #include <fstream>
+#include <vector>
 
 class ArenaCalibration
 {
 public:
+    struct transformerData
+    {
+        double x_offset;
+        double y_offset;
+        double angular_offset;
+        double scale_factor;
+    };
+
     bool is_finished;
     unsigned int n_points;
+    transformerData transformer;
+
     ArenaCalibration() : image_transport_(node_handle_), is_finished(false), n_points(0)
     {
         image_sub_ = image_transport_.subscribe("/image_rect", 1,
@@ -20,6 +31,13 @@ public:
 
         std::string path = ros::package::getPath("arena_pkg") + "/config";
         std::string fileName = path + "/tam_points.yaml";
+
+        node_handle_.param("/calibration_arena/x_offset", transformer.x_offset, 0.0);
+        node_handle_.param("/calibration_arena/y_offset", transformer.y_offset, 0.0);
+        node_handle_.param("/calibration_arena/angular_offset", transformer.angular_offset, 0.0);
+        node_handle_.param("/calibration_arena/scale_factor", transformer.scale_factor, 1.0);
+
+        ROS_INFO("the value is %f", transformer.x_offset);
 
         yaml_.open(fileName, std::fstream::out | std::fstream::trunc);
         if (yaml_.is_open())
@@ -63,12 +81,12 @@ public:
         {
             std::cout << "Left mouse button clicked at (" << x << ", " << y << ")" << std::endl;
 
-            cv::drawMarker(img_resize_, cv::Point(x, y), cv::Vec3b(255, 0, 0));
-
-            tam_points_.push_back(cv::Point(x, y));
+            cv::drawMarker(img_, cv::Point(x, y), cv::Vec3b(255, 0, 0));
+            cv::Point2d newPoints = scalePoints(cv::Point2d(x, y));
+            tam_points_.push_back(newPoints);
 
             // Append to YAML file
-            yaml_ << "point_" << n_points << " : [" << x << ", " << y << "]\n";
+            yaml_ << "point_" << n_points << " : [" << newPoints.x << ", " << newPoints.y << "]\n";
             n_points++;
 
             return;
@@ -88,7 +106,7 @@ public:
         }
 
         img_ = cv_ptr->image;
-        cv::resize(img_, img_resize_, cv::Size(), 0.8, 0.8, cv::INTER_AREA);
+        // cv::resize(img_, img_resize_, cv::Size(), 0.8, 0.8, cv::INTER_AREA);
 
         // creating window
         cv::namedWindow("ImageDisplay", cv::WINDOW_AUTOSIZE);
@@ -97,10 +115,20 @@ public:
 
         while (!is_finished)
         {
-            cv::imshow("ImageDisplay", img_resize_);
+            cv::imshow("ImageDisplay", img_);
             cv::waitKey(50);
         }
         cv::destroyWindow("ImageDisplay");
+    }
+    cv::Point2d scalePoints(cv::Point2d point)
+    {
+
+        double x = -1 * (-1 * point.x - transformer.x_offset) * transformer.scale_factor;
+        double y = -1 * (point.y - transformer.y_offset) * transformer.scale_factor;
+
+        // double x = x_tmp * cos(-transformer.angular_offset) - y_tmp * sin(-transformer.angular_offset);
+        // double y = x_tmp * sin(-transformer.angular_offset) + y_tmp * cos(-transformer.angular_offset);
+        return cv::Point2d(x, y);
     }
 
 private:

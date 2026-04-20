@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.0.2)
-project(arena_pkg)
+project(comunication_pkg)
 
 ## Compile as C++11, supported in ROS Kinetic and newer
 # add_compile_options(-std=c++11)
@@ -8,16 +8,10 @@ project(arena_pkg)
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
-  cv_bridge
-  image_transport
-  camera_info_manager
   roscpp
   rospy
   std_msgs
-  tracker_pkg
 )
-
-find_package(OpenCV REQUIRED)
 
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
@@ -110,7 +104,7 @@ find_package(OpenCV REQUIRED)
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
 #  INCLUDE_DIRS include
-#  LIBRARIES arena_pkg
+#  LIBRARIES comunication_pkg
 #  CATKIN_DEPENDS roscpp rospy std_msgs
 #  DEPENDS system_lib
 )
@@ -128,26 +122,8 @@ include_directories(
 
 ## Declare a C++ library
 # add_library(${PROJECT_NAME}
-#   src/${PROJECT_NAME}/arena_pkg.cpp
+#   src/${PROJECT_NAME}/comunication_pkg.cpp
 # )
-
-add_executable(supervisor_pos_node src/supervisor_pos_node.cpp)
-add_executable(calibration_arena src/calibration_arena.cpp)
-
-
-target_link_libraries(supervisor_pos_node
-  ${catkin_LIBRARIES}
-  ${OpenCV_LIBRARIES}
-)
-target_link_libraries(calibration_arena
-  ${catkin_LIBRARIES}
-  ${OpenCV_LIBRARIES}
-)
-
-
-add_dependencies(supervisor_pos_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
-add_dependencies(calibration_arena ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
-
 
 ## Add cmake target dependencies of the library
 ## as an example, code may need to be generated before libraries
@@ -157,7 +133,7 @@ add_dependencies(calibration_arena ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_
 ## Declare a C++ executable
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
-# add_executable(${PROJECT_NAME}_node src/arena_pkg_node.cpp)
+# add_executable(${PROJECT_NAME}_node src/comunication_pkg_node.cpp)
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
@@ -221,7 +197,7 @@ add_dependencies(calibration_arena ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_
 #############
 
 ## Add gtest based cpp test target and link libraries
-# catkin_add_gtest(${PROJECT_NAME}-test test/test_arena_pkg.cpp)
+# catkin_add_gtest(${PROJECT_NAME}-test test/test_comunication_pkg.cpp)
 # if(TARGET ${PROJECT_NAME}-test)
 #   target_link_libraries(${PROJECT_NAME}-test ${PROJECT_NAME})
 # endif()

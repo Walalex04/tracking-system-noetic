@@ -13,4 +13,4 @@ uint8 WORK_BLUE = 2
 nav_msgs/Odometry odom
 uint8 robotstate
 uint8 typework
-float32 timework
+uint32 timework
